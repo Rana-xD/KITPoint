@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 
@@ -42,13 +44,31 @@ public class ControllerFile {
 		String message = "Hello World";
 		return new ModelAndView("project", "message", message);
 	}
-	
-//	=================project============================
+
+	//	=================login============================
+	@RequestMapping("/login")
+	public ModelAndView viewLogin() {
+		return new ModelAndView("login");
+	}
+//	=================projectDetail============================
 	@RequestMapping("/projectDetail")
 	public ModelAndView viewProjectdetail() {
-		String message = "Hello World";
-		return new ModelAndView("projectDetail", "message", message);
+		//String message = "Hello World";
+		return new ModelAndView("projectDetail");
 	}
+//	=================taskDetails============================
+	@RequestMapping("/taskDetail")
+	public ModelAndView viewTaskdetail() {
+		//String message = "Hello World";
+		return new ModelAndView("taskDetail");
+	}
+//	=================taskDetails============================
+	@RequestMapping("/task")
+	public ModelAndView viewTaskView() {
+		//String message = "Hello World";
+		return new ModelAndView("taskView");
+	}
+
 //1. First Method using model classes	
 	
 //=================Submit Users==============================
@@ -201,6 +221,23 @@ public class ControllerFile {
 		}
 		
 		return map;
+	}
+	
+	@RequestMapping(value="/validate", method=RequestMethod.POST)
+	public ModelAndView toValidate(@RequestParam Map<String,String> reqPar)
+	{
+		String name= reqPar.get("name");
+		String pass= reqPar.get("pass");
+		System.out.println(name+" "+pass);
+		if(name.equals("kit") && pass.equals("kit"))
+			{return new ModelAndView("project");}
+		else 
+		{	
+			ModelAndView model = new ModelAndView("login");
+			System.out.println("Else runs");
+			model.addObject("message","Please input the correct username and password");
+			return model;
+		}
 	}
 		
 }
