@@ -6,11 +6,11 @@
 		
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-        <property name="hibernate.connection.password">ganesh</property>
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
-        <property name="hibernate.connection.username">system</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">pannrana</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/KITPoint</property>
         
         <!--  <property name="current_session_context_class">thread</property> -->
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
@@ -18,5 +18,19 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
          <mapping resource ="user.hbm.xml" />
+         <mapping resource ="batch_master.hbm.xml"/>
+         <mapping resource ="budget.hbm.xml"/>
+         <mapping resource ="budget_master.hbm.xml"/>
+         <mapping resource ="kit_point.hbm.xml"/>
+         <mapping resource ="kit_point_student_wise.hbm.xml"/>
+         <mapping resource ="project_category_master.hbm.xml"/>
+         <mapping resource ="project_master.hbm.xml"/>
+         <mapping resource ="project_member.hbm.xml"/>
+         <mapping resource ="project_stage.hbm.xml"/>
+         <mapping resource ="project_stage_master.hbm.xml"/>
+         <mapping resource ="semester_master.hbm.xml"/>
+         <mapping resource ="task_master.hbm.xml"/>
+         <mapping resource ="user_info.hbm.xml"/>
+         <mapping resource ="value_per_hour.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
