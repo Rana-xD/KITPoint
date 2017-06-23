@@ -1,106 +1,115 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<div class="wrapper">
- <div class="row">
-                 <form role="form">
-                    <div class="col-lg-6">
+ 			<div class="row">
+                 <form class="form-horizontal">
+                    <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label>Project Name</label>
-                                <input class="form-control">
+                                <label class="col-sm-4 control-label">Project Name</label>
+                                <div class="col-sm-8">
+                                	<input class="form-control">
+                                </div>
                         </div>
                             <div class="form-group">
-                                <label>Project Category</label>
-                                <select class="form-control">
-                                    <option>A2A</option>
-                                    <option>Client</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                                <label class="col-sm-4 control-label">Project Category</label>
+	                            <div class="col-sm-8">
+	                                <select class="form-control">
+	                                    <option>A2A</option>
+	                                    <option>Client</option>
+	                                    <option>3</option>
+	                                    <option>4</option>
+	                                    <option>5</option>
+	                                </select>
+	                            </div>
                             </div>
     					 <div class="form-group">
-                                <label>Project Coordinator</label>
-                                <select class="form-control">
-                                    <option>Mr. Leo</option>
-                                    <option>Mr. Denez</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                                <label class="col-sm-4 control-label">Project Coordinator</label>
+	                            <div class="col-sm-8">    
+	                                <select class="form-control">
+	                                    <option>Mr. Leo</option>
+	                                    <option>Mr. Denez</option>
+	                                    <option>3</option>
+	                                    <option>4</option>
+	                                    <option>5</option>
+	                                </select>
+	                            </div>
                             </div>
                                  <div class="form-group">
-                                <label>Team Leader</label>
-                                <select class="form-control">
-                                    <option>Mr. Rana</option>
-                                    <option>Mr. Vathanak</option>
-                                    <option>Mr. Pidor</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                                <label class="col-sm-4 control-label">Team Leader</label>
+	                             <div class="col-sm-8"> 
+	                                <select class="form-control">
+	                                    <option>Mr. Rana</option>
+	                                    <option>Mr. Vathanak</option>
+	                                    <option>Mr. Pidor</option>
+	                                    <option>4</option>
+	                                    <option>5</option>
+	                                </select>
+	                             </div>
                             </div>
                             
                             <div class="form-group">
-                                <label>Planning Hours</label>
-                                <input class="form-control">
+                                <label class="col-sm-4 control-label">Planning Hours</label>
+                                <div class="col-sm-8">
+                                	<input class="form-control">
+                                </div>
                         </div>
-                           <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-                        
-
+                           
                   		  </div>
-                         <div class="col-lg-6">
+                  		    
+                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label>Project code</label>
-                                <input class="form-control">
+                                <label class="col-sm-4 control-label">Project code</label>
+                                <div class="col-sm-8">
+                                	<input class="form-control">
+                                </div>
                         </div>
-                            <div class="form-group col-lg-6">
-                                <label class="control-label" for="date">Start Date</label>
-                                  <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Start Date</label>
+                                <div class="col-sm-8">
+                                	<input class="form-control" id="date" name="date"  type="text"/>
+                                </div>
                             </div>
-    					 <div class="form-group col-lg-6">
-                                <label class="control-label" for="date">End Date</label>
-                              <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+    					 <div class="form-group">
+                                <label class="col-sm-4 control-label">End Date</label>
+                              	<div class="col-sm-8">
+                              		<input class="form-control" id="date" name="date"  type="text"/>
+                              	</div>
                             </div>
-                                 <div class="form-group col-lg-6">
-                                <label class="control-label" for="date">Deadline</label>
-                                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                                 <div class="form-group ">
+                                <label class="col-sm-4 control-label">Deadline</label>
+                                <div class="col-sm-8">
+                                	<input class="form-control" id="date" name="date"  type="text"/>
+                                </div>
                         </div>
-                                 <div class="form-group col-lg-6">
-                                <label>Project State</label>
-                                <select class="form-control">
-                                    <option>To Approve Project</option>
-                                    <option>Completed Project</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                                 <div class="form-group">
+                                <label class="col-sm-4 control-label">Project State</label>
+	                            <div class="col-sm-8">
+	                                <select class="form-control">
+	                                    <option>To Approve Project</option>
+	                                    <option>Completed Project</option>
+	                                    <option>3</option>
+	                                    <option>4</option>
+	                                    <option>5</option>
+	                                </select>
+	                            </div>
                             </div>
                             
                               <div class="form-group">
-                                <label>Skill Set</label>
-                                <input class="form-control">
+                                <label class="col-sm-4 control-label">Skill Set</label>
+                                <div class="col-sm-8">
+                                	<input class="form-control">
+                                </div>
                             </div> 
                              <div class="form-group">
-                                <label>KIT point</label>
-                                <input class="form-control">
+                                <label class="col-sm-4 control-label">KIT point</label>
+                                <div class="col-sm-8">	
+                                	<input class="form-control">
+                                </div>
                             </div>
-                          
+                          	 <div class="ol-sm-offset-2 col-sm-10">	
+			                   <button type="submit" class="btn btn-default">Create</button>
+			                   <button type="reset" class="btn btn-default">Cancel</button>
+	                    </div>
                   		  </div>
-                   
-                    	
+                  	
 	                    </form>
                     </div>
-
-</div>
-
-</body>
-</html>
+			

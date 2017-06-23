@@ -56,4 +56,12 @@
 		<put-attribute name="title" value="setting" />
 		<put-attribute name="body" value="/WEB-INF/views/view/kitpoint.jsp" />
 	</definition>
+		<definition name="createUser" extends="base.definition">
+		<put-attribute name="title" value="setting" />
+		<put-attribute name="body" value="/WEB-INF/views/view/createUser.jsp" />
+	</definition>
+	<definition name="changePassword" extends="base.definition">
+		<put-attribute name="title" value="Profile" />
+		<put-attribute name="body" value="/WEB-INF/views/view/profile.jsp" />
+	</definition>
 </tiles-definitions>

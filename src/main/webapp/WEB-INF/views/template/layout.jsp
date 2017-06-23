@@ -4,8 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title><tiles:insertAttribute name="title" /></title>
   <!-- Bootstrap Core CSS -->
   <spring:url value="/resources/Bootstrap/css/bootstrap.min.css" var="bootatrapCore"/>
   <spring:url value="/resources/Bootstrap/css/sb-admin.css" var="CustomCSS"/>
@@ -32,25 +33,25 @@
  <div id="wrapper">
  		  <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div><tiles:insertAttribute name="header" /></div>
-			<div><tiles:insertAttribute name="sidebar" /></div>
+			<tiles:insertAttribute name="header" />
+			<tiles:insertAttribute name="sidebar" />
 		</nav>
 		<div id="page-wrapper">
-			
+			<div class="contianer-fluid">
 			<tiles:insertAttribute name="body" />
+			</div>
 		</div>
-    		<div style="clear:both"><tiles:insertAttribute name="footer" /></div>
-
+    
   </div>
-  <script src="Bootstrap/js/jquery.js"></script>
+  <script src="/KIT Point Management System/resources/Bootstrap/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="Bootstrap/js/bootstrap.min.js"></script>
+    <script src="/KIT Point Management System/resources/Bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="Bootstrap/js/plugins/morris/raphael.min.js"></script>
-    <script src="Bootstrap/js/plugins/morris/morris.min.js"></script>
-    <script src="Bootstrap/js/plugins/morris/morris-data.js"></script>
+    <script src="/KIT Point Management System/resources/Bootstrap/js/plugins/morris/raphael.min.js"></script>
+    <script src="/KIT Point Management System/resources/Bootstrap/js/plugins/morris/morris.min.js"></script>
+    <script src="/KIT Point Management System/resources/Bootstrap/js/plugins/morris/morris-data.js"></script>
     <script>
     $(document).ready(function(){
       var date_input=$('input[name="date"]'); //our date input has the name "date"
