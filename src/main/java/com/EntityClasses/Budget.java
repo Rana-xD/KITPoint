@@ -9,6 +9,13 @@ public class Budget {
 	private int cost;
 	private Timestamp created_at;
 	private Timestamp updated_at;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getBudget_id() {
 		return budget_id;
 	}

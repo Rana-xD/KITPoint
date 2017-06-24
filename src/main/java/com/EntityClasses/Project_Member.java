@@ -7,6 +7,12 @@ public class Project_Member {
 		private int project_id;
 		private int user_id;
 		private Timestamp created_at;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
 		private Timestamp updated_at;
 		public int getProject_id() {
 			return project_id;

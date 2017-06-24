@@ -18,13 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
-
-
-
-
-
-
 import com.DaoClasses.userDaoImpl;
 import com.EntityClasses.Login;
 import com.EntityClasses.User;
@@ -121,31 +114,31 @@ public class ControllerFile {
 	
 //=================Submit Users==============================
 	
-	@RequestMapping(value="/add1", method = RequestMethod.GET)
+/*	@RequestMapping(value="/add1", method = RequestMethod.GET)
 	public ModelAndView getPage(){
-		ModelAndView view =new ModelAndView("submit");
+		ModelAndView view =new ModelAndView("/views/submit");
 		return view;
-	}
+	}*/
 	
 	
-	@RequestMapping(value="/submit.html", method=RequestMethod.POST)                                            
-	public ModelAndView Submit(submit model1,BindingResult result)        
+	@RequestMapping(value="/submit", method=RequestMethod.POST)                                            
+	public ModelAndView Submit(submit newUser,BindingResult result)        
 	{                                                                                                
 	   if(result.hasErrors())
 	   {
-		ModelAndView model2 = new ModelAndView("submit");  //if it is error send it back to submit.jsp 
+		ModelAndView model2 = new ModelAndView("createUser");  //if it is error send it back to submit.jsp 
 		model2.addObject("headerMsg", "Enter the correct format");  
 		return model2;	
 	   }
 	   
 	  // usersServiceImpl dao = new usersServiceImpl();
 	    		
-		model1=usersService1.addUser1(model1);
+		newUser=usersService1.addUser1(newUser);
 				
-		ModelAndView model2 = new ModelAndView("submitOutput");
+		ModelAndView model2 = new ModelAndView("createUser");
 		model2.addObject("headerMsg", "Value inserted successfully");  
 		
-		model2.addObject("msg", model1);                                                  //This name will store the value in msg
+		model2.addObject("msg", newUser);    //This name will store the value in msg
 
 		return model2;
 	}
@@ -212,7 +205,7 @@ public class ControllerFile {
 		 Map<String,Object> map = new HashMap<String,Object>();
 	
 		   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
-			List<User> list = usersService1.getAllUsers();
+			List<User_Info> list = usersService1.getAllUsers();
 			 		
 			if (list != null){
 				map.put("status","200");
@@ -238,7 +231,7 @@ public class ControllerFile {
 
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> getSaved(User users){
+	public @ResponseBody Map<String,Object> getSaved(User_Info users){
 		
 		Map<String,Object> map = new HashMap<String,Object>();		
 		 //DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
@@ -260,7 +253,7 @@ public class ControllerFile {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> delete(User users){
+	public @ResponseBody Map<String,Object> delete(User_Info users){
 		Map<String,Object> map = new HashMap<String,Object>();		
 		 //DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
 		if(usersService1.deleteUser(users)){

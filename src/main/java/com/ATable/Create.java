@@ -16,6 +16,7 @@ public class Create
         	Class.forName("org.postgresql.Driver");
         	
             //step2 Get the connection from db 
+
         	Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5433/KITPoint","postgres", "admin");
 
             //step3 create the statement object  
