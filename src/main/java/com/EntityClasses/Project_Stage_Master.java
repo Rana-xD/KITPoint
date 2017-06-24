@@ -6,7 +6,7 @@ public class Project_Stage_Master {
 		private int id;
 		private String stage_name;
 		private Timestamp created_at;
-		private Timestamp update;
+		private Timestamp updated_at;
 		public int getId() {
 			return id;
 		}
@@ -25,11 +25,14 @@ public class Project_Stage_Master {
 		public void setCreated_at(Timestamp created_at) {
 			this.created_at = created_at;
 		}
-		public Timestamp getUpdate() {
-			return update;
+		public Timestamp getUpdated_at() {
+			return updated_at;
 		}
-		public void setUpdate(Timestamp update) {
-			this.update = update;
+		public void setUpdated_at(Timestamp updated_at) {
+			this.updated_at = updated_at;
+		}
+		public void setUpdate(Timestamp updated_at) {
+			this.updated_at = updated_at;
 		}
 		
 		

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.DaoClasses.userDaoImpl;
 import com.DaoClasses.usersDao;
 import com.EntityClasses.User;
+import com.EntityClasses.User_Info;
 import com.ModelClasses.retrieve;
 import com.ModelClasses.submit;
 
@@ -23,11 +24,11 @@ public class usersServiceImpl implements usersService{
 		return usersDao1.addUser1(users);	
 	}
 	
-	public boolean addUser2(User users) {
+	public boolean addUser2(User_Info users) {
 		return usersDao1.addUser2(users);
 	}
 
-	public List<User> getAllUsers() {
+	public List<User_Info> getAllUsers() {
 		return usersDao1.getAllUsers();
 	}
 	
@@ -35,7 +36,7 @@ public class usersServiceImpl implements usersService{
 		return usersDao1.getUserById(userid);
 	}
 
-	public boolean deleteUser(User users){
+	public boolean deleteUser(User_Info users){
 		return usersDao1.deleteUser(users);
 	}
 	

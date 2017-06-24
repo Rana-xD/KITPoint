@@ -1,5 +1,6 @@
 package com.DaoClasses;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
-import com.EntityClasses.User;
+
+import com.EntityClasses.User_Info;
 import com.HibernateUtil.HibernateUtil;
 import com.ModelClasses.retrieve;
 import com.ModelClasses.submit;
-import com.ServiceClasses.usersService;
+//import com.ServiceClasses.usersService;
 
 
 
@@ -24,21 +26,29 @@ public class userDaoImpl implements usersDao{
 	public submit addUser1(submit model1) {
         Transaction trns = null;
         
-        Integer id=model1.getId();
 	    String name=model1.getName();
-	    String salary =model1.getSalary();
+	    String email =model1.getEmail();
+        String password=model1.getPassword();
+        Integer batch=model1.getBatch();
+        String user_type= model1.getUser_type();
+        Timestamp created_at= new Timestamp(System.currentTimeMillis()); 
 	   
-	    User user=new User();
-		user.setUser_id(id);
-		user.setUser_name(name);
-		user.setUser_salary(salary);
+	    User_Info user=new User_Info();
+		
+		user.setName(name);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setBatch(batch);
+		user.setUser_type(user_type);
+		user.setCreated_at(created_at);
 		
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             trns = session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
-        } catch (RuntimeException e) {
+        } 
+        catch (RuntimeException e) {
             if (trns != null) {
                 trns.rollback();
             }
@@ -51,7 +61,7 @@ public class userDaoImpl implements usersDao{
 		return model1;
     }
 
-    public boolean addUser2(User user) {
+    public boolean addUser2(User_Info user) {
         Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -72,13 +82,13 @@ public class userDaoImpl implements usersDao{
     }
     
     
-    public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
+    public List<User_Info> getAllUsers() {
+        List<User_Info> users= new ArrayList<User_Info>();
         Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             trns = session.beginTransaction();
-            users = session.createQuery("from User").list();
+            users = session.createQuery("from User_Info").list();
             System.out.println(users);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -93,7 +103,7 @@ public class userDaoImpl implements usersDao{
     
     public retrieve getUserById(retrieve model1) {
        
-    	User user = null;
+    	User_Info user = null;
         Transaction trns = null;
         
         Integer id=model1.getId();
@@ -105,15 +115,15 @@ public class userDaoImpl implements usersDao{
             Query query = session.createQuery(queryString);
             query.setInteger("id", id);
             
-            user = (User) query.uniqueResult();
+            user = (User_Info) query.uniqueResult();
             
-            Integer id1=user.getUser_id();
-    	    String name=user.getUser_name();
-    	    String salary =user.getUser_salary();
+            Integer id1=user.getId();
+    	    String name=user.getName();
+    	    String email =user.getEmail();
     	    
     	    model1.setId(id1);
     	    model1.setName(name);
-    	    model1.setSalary(salary);
+    	    model1.setSalary(email);
 			
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -128,13 +138,13 @@ public class userDaoImpl implements usersDao{
    
     
     
-  public boolean deleteUser(User users) {
+  public boolean deleteUser(User_Info users) {
     	
     	Integer id1=0;
         Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-        	id1=users.getUser_id();
+        	id1=users.getId();
         	trns = session.beginTransaction();
             String queryString = "delete from User where user_id = :id";
             Query query = session.createQuery(queryString);
@@ -160,7 +170,7 @@ public class userDaoImpl implements usersDao{
    
     
 
-    public void updateUser(User user) {
+    public void updateUser(User_Info user) {
         Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

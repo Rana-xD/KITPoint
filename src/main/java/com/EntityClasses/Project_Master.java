@@ -9,7 +9,7 @@ public class Project_Master {
 		private String project_code;
 		private String skillset;
 		private int project_type;
-		private int project_Co;
+		private int project_co;
 		private int project_leader;
 		private String project_member;
 		private String description;
@@ -51,11 +51,11 @@ public class Project_Master {
 		public void setProject_type(int project_type) {
 			this.project_type = project_type;
 		}
-		public int getProject_Co() {
-			return project_Co;
+		public int getProject_co() {
+			return project_co;
 		}
-		public void setProject_Co(int project_Co) {
-			this.project_Co = project_Co;
+		public void setProject_co(int project_co) {
+			this.project_co = project_co;
 		}
 		public int getProject_leader() {
 			return project_leader;
