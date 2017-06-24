@@ -23,7 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.DaoClasses.userDaoImpl;
+import com.EntityClasses.Login;
 import com.EntityClasses.User;
 import com.ModelClasses.retrieve;
 import com.ModelClasses.submit;
@@ -268,17 +270,21 @@ public class ControllerFile {
 	}
 	
 	@RequestMapping(value="/validate", method=RequestMethod.POST)
-	public ModelAndView toValidate(@RequestParam Map<String,String> reqPar)
+	public ModelAndView toValidate(Login user, BindingResult result)
 	{
-		String name= reqPar.get("name");
-		String pass= reqPar.get("pass");
-		System.out.println(name+" "+pass);
-		if(name.equals("kit") && pass.equals("kit"))
+		if(result.hasErrors())
+		   {
+			ModelAndView model2 = new ModelAndView("login");  //if it is error send it back to retrieve.jsp 
+			model2.addObject("message", "Enter the correct format");  
+			return model2;	
+		   }
+		System.out.println(user.getEmail()+"  "+user.getPassword());
+		user = userDaoImpl.validate(user);
+		if(user!=null)
 			{return new ModelAndView("project");}
 		else 
 		{	
 			ModelAndView model = new ModelAndView("login");
-			System.out.println("Else runs");
 			model.addObject("message","Please input the correct username and password");
 			return model;
 		}

@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.EntityClasses.Login;
 import com.EntityClasses.User;
 import com.HibernateUtil.HibernateUtil;
 import com.ModelClasses.retrieve;
@@ -177,6 +178,35 @@ public class userDaoImpl implements usersDao{
             session.close();
         }
     }
+    
+    public static Login validate(Login login)
+    {
+    	Transaction trns = null;
+        
+        String email= login.getEmail();
+        String password= login.getPassword();
+        System.out.println(email+"  "+password);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString = "from User_Info where email = :email and password = :password";
+            Query query = session.createQuery(queryString);
+            query.setString("email", email);
+            query.setString("password", password);
+            
+            login = (Login) query.uniqueResult();
+            System.out.println(login);
+			
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return login;
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return login;
+    }
+    
 
 
 	

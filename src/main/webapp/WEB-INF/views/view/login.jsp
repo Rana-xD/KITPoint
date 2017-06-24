@@ -16,8 +16,8 @@
   <div class="login-page">
   <div class="form">
     <form class="login-form" action="validate" method="post">
-      <input type="text" placeholder="username" name="name" />
-      <input type="password" placeholder="password" name="pass" />
+      <input type="text" placeholder="Email" name="email" />
+      <input type="password" placeholder="Password" name="password" />
       <input type="submit" class="a" value="Login">
     </form>
   </div>
