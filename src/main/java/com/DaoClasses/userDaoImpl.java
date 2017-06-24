@@ -197,10 +197,12 @@ public class userDaoImpl implements usersDao{
         String password= user.getPassword();
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        System.out.println("Dao " + email+"  "+password);
+
         try {
+        	
             trns = session.beginTransaction();
             String queryString = "from User_Info where email = :email and password = :password";
+            System.out.println("After Query");
             Query query = session.createQuery(queryString);
             query.setString("email", email);
             query.setString("password", password);
@@ -209,7 +211,7 @@ public class userDaoImpl implements usersDao{
             System.out.println("Try "+user);
 			
         } catch (RuntimeException e) {
-        	System.out.println("Exeption");
+        	System.out.println("Exeption "+user);
             e.printStackTrace();
             return user;
         } finally {
