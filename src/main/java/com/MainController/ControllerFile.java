@@ -24,9 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.DaoClasses.userDaoImpl;
 import com.EntityClasses.Login;
 import com.EntityClasses.User;
+import com.EntityClasses.User_Info;
 import com.ModelClasses.retrieve;
 import com.ModelClasses.submit;
 import com.ServiceClasses.usersService;
@@ -270,7 +272,7 @@ public class ControllerFile {
 	}
 	
 	@RequestMapping(value="/validate", method=RequestMethod.POST)
-	public ModelAndView toValidate(Login user, BindingResult result)
+	public ModelAndView toValidate(User_Info user, BindingResult result)
 	{
 		if(result.hasErrors())
 		   {
@@ -278,7 +280,6 @@ public class ControllerFile {
 			model2.addObject("message", "Enter the correct format");  
 			return model2;	
 		   }
-		System.out.println(user.getEmail()+"  "+user.getPassword());
 		user = userDaoImpl.validate(user);
 		if(user!=null)
 			{return new ModelAndView("project");}

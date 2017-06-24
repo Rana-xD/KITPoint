@@ -11,7 +11,7 @@
     <property name="project_code" column="project_code"/>
     <property name="skillset" column="skillset"/>
     <property name="project_type" column="project_type"/>
-    <property name="project_co" column="project_co"/>
+    <property name="project_Co" column="project_co"/>
     <property name="project_leader" column="project_leader"/>
     <property name="project_member" column="project_member"/>
     <property name="description" column="description"/>

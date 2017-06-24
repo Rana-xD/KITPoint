@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.EntityClasses.Login;
 import com.EntityClasses.User;
+import com.EntityClasses.User_Info;
 import com.HibernateUtil.HibernateUtil;
 import com.ModelClasses.retrieve;
 import com.ModelClasses.submit;
@@ -179,14 +180,15 @@ public class userDaoImpl implements usersDao{
         }
     }
     
-    public static Login validate(Login login)
+    public static User_Info validate(User_Info user)
     {
     	Transaction trns = null;
         
-        String email= login.getEmail();
-        String password= login.getPassword();
-        System.out.println(email+"  "+password);
+        String email= user.getEmail();
+        String password= user.getPassword();
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
+        System.out.println("Dao " + email+"  "+password);
         try {
             trns = session.beginTransaction();
             String queryString = "from User_Info where email = :email and password = :password";
@@ -194,17 +196,18 @@ public class userDaoImpl implements usersDao{
             query.setString("email", email);
             query.setString("password", password);
             
-            login = (Login) query.uniqueResult();
-            System.out.println(login);
+            user = (User_Info) query.uniqueResult();
+            System.out.println("Try "+user);
 			
         } catch (RuntimeException e) {
+        	System.out.println("Exeption");
             e.printStackTrace();
-            return login;
+            return user;
         } finally {
             session.flush();
             session.close();
         }
-        return login;
+        return user;
     }
     
 
