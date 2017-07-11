@@ -77,7 +77,7 @@
                     <div class="container" data-project-status="">
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav" id="project-stage" onclick="showProjectBasedStatus(this.value)">
-                                <li class="active" value="all"><a>ALL</a>
+                                <li value="all"><a>ALL</a>
                                 </li>
                                 <li class="approve_project" value ="Approved Project"><a>Approved Project</a>
                                 </li>
@@ -86,14 +86,6 @@
                                 <li value ="Pending Project"><a>Pending Project</a>
                                 </li>
                                 <li value ="Completed Project"><a>Completed Project</a>
-=======
-                                <li value ="Approved Project"><a href="#about">Approved Project</a>
-                                </li>
-                                <li value ="To approve Project"><a href="#contact">To approve Project</a>
-                                </li>
-                                <li value ="Pending Project"><a href="#contact">Pending Project</a>
-                                </li>
-                                <li value ="Completed Project"><a href="#contact">Completed Project</a>
                                 </li>
                             </ul>
                         </div>
