@@ -47,6 +47,10 @@
 		<put-attribute name="title" value="setting" />
 		<put-attribute name="body" value="/WEB-INF/views/view/projectCategory.jsp" />
 	</definition>
+	<definition name="viewSuccess" extends="base.definition">
+		<put-attribute name="title" value="setting" />
+		<put-attribute name="body" value="/WEB-INF/views/view/success.jsp" />
+	</definition>
 		<definition name="viewValuePerHour" extends="base.definition">
 		<put-attribute name="title" value="setting" />
 		<put-attribute name="body" value="/WEB-INF/views/view/valuePerHour.jsp" />
@@ -58,6 +62,14 @@
 		<definition name="createUser" extends="base.definition">
 		<put-attribute name="title" value="setting" />
 		<put-attribute name="body" value="/WEB-INF/views/view/createUser.jsp" />
+	</definition>
+	<definition name="createBatch" extends="base.definition">
+		<put-attribute name="title" value="setting" />
+		<put-attribute name="body" value="/WEB-INF/views/view/createBatch.jsp" />
+	</definition>
+	<definition name="updateBatch" extends="base.definition">
+		<put-attribute name="title" value="setting" />
+		<put-attribute name="body" value="/WEB-INF/views/view/updateBatch.jsp" />
 	</definition>
 	<definition name="changePassword" extends="base.definition">
 		<put-attribute name="title" value="Profile" />

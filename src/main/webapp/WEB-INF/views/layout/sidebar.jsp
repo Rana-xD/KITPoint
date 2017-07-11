@@ -5,7 +5,7 @@
                         </i><span>Project</span> </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-file fa-3x"></i> Tasks</a>
+                        <a href="taskDetail"><i class="fa fa-fw fa-file fa-3x"></i> Tasks</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-bar-chart-o fa-3x"></i> Report</a>

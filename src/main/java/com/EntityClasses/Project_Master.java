@@ -1,7 +1,7 @@
 package com.EntityClasses;
 
-import java.security.Timestamp;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Project_Master {
 		private int id;

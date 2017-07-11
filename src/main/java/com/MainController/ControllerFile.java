@@ -1,6 +1,7 @@
 package com.MainController;
 
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
+
+
+
+
+
+
+
+
 import com.DaoClasses.userDaoImpl;
+import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Login;
+import com.EntityClasses.Project_Category_Master;
+import com.EntityClasses.Project_Master;
+import com.EntityClasses.Project_Stage_Master;
+import com.EntityClasses.Semester_Master;
 import com.EntityClasses.User;
 import com.EntityClasses.User_Info;
+import com.ModelClasses.Project_Model;
+import com.ModelClasses.Task_Model;
 import com.ModelClasses.retrieve;
 import com.ModelClasses.submit;
 import com.ServiceClasses.usersService;
@@ -42,17 +59,116 @@ public class ControllerFile {
 		return new ModelAndView("project", "message", message);
 	}
 
-	//	=================login============================
-	@RequestMapping("/login")
+//	=================login============================
+	@RequestMapping("/")
 	public ModelAndView viewLogin() {
 		return new ModelAndView("login");
 	}
+// ================================Login Validate================================================	
+		@RequestMapping(value="/validate", method=RequestMethod.POST)
+		public ModelAndView toValidate(User_Info user, BindingResult result)
+		{
+			if(result.hasErrors())
+			   {
+				ModelAndView model2 = new ModelAndView("login");  //if it is error send it back to retrieve.jsp 
+				model2.addObject("message", "Enter the correct format");  
+				return model2;	
+			   }
+			user = userDaoImpl.validate(user);
+			if(user!=null)
+				{return new ModelAndView("project");}
+			else 
+			{	
+				ModelAndView model = new ModelAndView("login");
+				model.addObject("message","Please input the correct username and password");
+				return model;
+			}
+		}
 //	=================projectDetail============================
 	@RequestMapping("/projectDetail")
 	public ModelAndView viewProjectdetail() {
 		//String message = "Hello World";
 		return new ModelAndView("projectDetail");
 	}
+//============================Retreive all project category from DB send through Ajax========================
+			@RequestMapping(value="/projectCategoryList", method=RequestMethod.POST)
+			public @ResponseBody Map<String,Object> getProjectCategoryList(){
+						
+				 Map<String,Object> map = new HashMap<String,Object>();
+			
+				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+					List<Project_Category_Master> list = userDaoImpl.getProjectCategories();
+					 		
+					if (list != null)
+						map.put("data", list);
+					else
+						map.put("message","Data not found");			
+					
+					return map;
+			}
+//============================Get Project========================
+			@RequestMapping(value="/getProject", method=RequestMethod.POST)
+			public @ResponseBody Map<String,Object> getProject(){
+						
+				 Map<String,Object> map = new HashMap<String,Object>();
+			
+				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+					List<Project_Master> list = userDaoImpl.getAllProject();
+					 		
+					if (list != null)
+						map.put("project", list);
+					else
+						map.put("message","Data not found");			
+					
+					return map;
+			}
+			
+//============================Retreive all users and ProjectCategory and Project Stages from DB send through Ajax========================
+			@RequestMapping(value="/userNProjectCategoryListNStage", method=RequestMethod.POST)
+			public @ResponseBody Map<String,?> getUserNProjectCategoryListNStage(){
+						
+				 Map<String,List> map = new HashMap<String,List>();
+				 Map<String,Object> error = new HashMap<String,Object>();
+				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+					List<Project_Category_Master> listProjectCategory = userDaoImpl.getProjectCategories();
+					List<User_Info> listUser = userDaoImpl.getAllUser();
+					List<Project_Stage_Master> listProjectStage = userDaoImpl.getAllStages();
+					 		
+					if (listProjectCategory == null || listUser == null ||listProjectStage ==null)
+						{
+							error.put("message","Data not found");
+							return error;
+						}
+						
+					else
+						{
+							map.put("category", listProjectCategory);
+							map.put("user", listUser);
+							map.put("stage",listProjectStage);
+							return map;
+						}	
+					}
+//========================Save Project========================================================
+			@RequestMapping(value="/saveProject", method=RequestMethod.POST)
+			public @ResponseBody Map<String,Object> toSaveProject(Project_Model pm) throws ParseException{
+	        		int[] s = pm.getStage();
+					Map<String,Object> map = new HashMap<String,Object>();				
+					int id = userDaoImpl.saveProject(pm);
+					System.out.println("ID IS"+id);
+					if(id!=0)
+					{
+						userDaoImpl.saveStage(id,s);
+						map.put("status","200");
+						map.put("message","Your record has been saved successfully");
+						return map;
+					}
+					else {
+						System.out.println("Else Runs");
+						map.put("status","999");
+						map.put("message","Failed");
+						return map;
+					}
+				}
 //	=================taskDetails============================
 	@RequestMapping("/taskDetail")
 	public ModelAndView viewTaskdetail() {
@@ -65,7 +181,48 @@ public class ControllerFile {
 		//String message = "Hello World";
 		return new ModelAndView("taskView");
 	}
+//==================get Project and User===========================
+	@RequestMapping(value="/ProjectNUser", method=RequestMethod.POST)
+	public @ResponseBody Map<String,?> getProjectNUser(){
+				
+		 Map<String,List> map = new HashMap<String,List>();
+		 Map<String,Object> error = new HashMap<String,Object>();
+		   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+			List<Project_Master> listProject = userDaoImpl.getAllProject();
+			List<User_Info> listUser = userDaoImpl.getAllUser();
+			 		
+			if (listProject == null || listUser == null)
+				{
+					error.put("message","Data not found");
+					return error;
+				}
+				
+			else
+				{
+					map.put("user", listUser);
+					map.put("project", listProject);
+					return map;
+				}	
+			}
 
+//======================save task===============================
+	@RequestMapping(value="/saveTask", method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> toSaveTask(Task_Model task) throws ParseException{
+			
+			//System.out.println("Name is: "+projectCategoryName.getName());
+			Map<String,Object> map = new HashMap<String,Object>();				
+			if(userDaoImpl.toSaveTask(task)){
+				map.put("status","200");
+				map.put("message","Your record has been saved successfully");
+				return map;
+			}
+			else {
+				System.out.println("Else Runs");
+				map.put("status","999");
+				map.put("message","Your record already existed");
+				return map;
+			}
+		}
 //	=================setting============================
 	@RequestMapping("/setting")
 	public ModelAndView viewSetting() {
@@ -87,11 +244,32 @@ public class ControllerFile {
 //	=================view project category============================
 	@RequestMapping("/projectCategory")
 	public ModelAndView viewProjectCategory() {
-		String message = "Hello World";
-		return new ModelAndView("viewProjectCaterory", "message", message);
+		return new ModelAndView("viewProjectCaterory");
 	}
 
-
+//================================Project Category Create============================================
+		@RequestMapping(value="/projectCategoryCreate", method=RequestMethod.POST)
+		public @ResponseBody Map<String,Object> toCreateProjectCategory(Project_Category_Master projectCategoryName){
+				
+				Map<String,Object> map = new HashMap<String,Object>();				
+				if(userDaoImpl.createProjectCategory(projectCategoryName)){
+					map.put("status","200");
+					map.put("message","Your record has been saved successfully");
+					return map;
+				}
+				else {
+					map.put("status","999");
+					map.put("message","Your record already existed");
+					return map;
+				}
+				
+			}
+//	=================view Value Per Hour============================
+	@RequestMapping("/valuePerHour")
+	public ModelAndView viewValuePerHour() {
+		String message = "Hello World";
+		return new ModelAndView("viewValuePerHour", "message", message);
+	}
 //	=================create new user============================
 	@RequestMapping("/newUser")
 	public ModelAndView createUser() {
@@ -104,18 +282,76 @@ public class ControllerFile {
 		String message = "Hello World";
 		return new ModelAndView("changePassword", "message", message);
 	}
+//	=================Create Batch============================
+	@RequestMapping("/createBatch")
+	public ModelAndView createBatch() {
+		return new ModelAndView("createBatch");
+	}
+//============================Retreive all semesters from DB send through Ajax========================
+		@RequestMapping(value="/semesterList", method=RequestMethod.POST)
+		public @ResponseBody Map<String,Object> getSemesterList(){
+					
+			 Map<String,Object> map = new HashMap<String,Object>();
+		
+			   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+				List<Semester_Master> list = userDaoImpl.getAllSemester();
+				 		
+				if (list != null)
+					map.put("data", list);
+				else
+					map.put("message","Data not found");			
+				
+				return map;
+		}
+//================================Save Batch============================================
+				@RequestMapping(value="/batchSubmit", method=RequestMethod.POST)
+				public @ResponseBody Map<String,Object> toCreateProjectCategory(Batch_Master batch){
+						
+						//System.out.println("Name is: "+projectCategoryName.getName());
+						Map<String,Object> map = new HashMap<String,Object>();				
+						if(userDaoImpl.saveBatch(batch)){
+							map.put("status","200");
+							map.put("message","Your record has been saved successfully");
+							return map;
+						}
+						else {
+							System.out.println("Else Runs");
+							map.put("status","999");
+							map.put("message","Your record already existed");
+							return map;
+						}
+					}
 
-//1. First Method using model classes	
-	
-//=================Submit Users==============================
-	
-/*	@RequestMapping(value="/add1", method = RequestMethod.GET)
-	public ModelAndView getPage(){
-		ModelAndView view =new ModelAndView("/views/submit");
-		return view;
-	}*/
-	
-	
+//===================Update Batch======================================
+	@RequestMapping("/updateBatch")
+	public ModelAndView updateBatch() {
+		return new ModelAndView("updateBatch");
+	}
+//============================Retreive all semesters and batches from DB send through Ajax========================
+			@RequestMapping(value="/semesterAndBatchList", method=RequestMethod.POST)
+			public @ResponseBody Map<String,?> getSemesterAndBatchList(){
+						
+				 Map<String,List> map = new HashMap<String,List>();
+				 Map<String,Object> error = new HashMap<String,Object>();
+				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+					List<Semester_Master> listSemester = userDaoImpl.getAllSemester();
+					List<Batch_Master> listBatch = userDaoImpl.getAllBatch();
+					 		
+					if (listSemester == null || listBatch == null)
+						{
+							error.put("message","Data not found");
+							return error;
+						}
+						
+					else
+						{
+							map.put("semester", listSemester);
+							map.put("batch", listBatch);
+							return map;
+						}	
+					}
+
+//=========================create user=========================================	
 	@RequestMapping(value="/submit", method=RequestMethod.POST)                                            
 	public ModelAndView Submit(submit newUser,BindingResult result)        
 	{                                                                                                
@@ -137,44 +373,6 @@ public class ControllerFile {
 
 		return model2;
 	}
-	
-	
-//=================Retrieve Users=====================
-	
-	
-	@RequestMapping(value="/retrieve", method = RequestMethod.GET)
-	public ModelAndView getResult(){
-		ModelAndView view =new ModelAndView("retrieve");
-		return view;
-	}
-	
-	
-	@RequestMapping(value="/result.html", method=RequestMethod.POST)                                            
-	public ModelAndView Retrieve(retrieve model1,BindingResult result)        
-	{                                                                                                
-	   if(result.hasErrors())
-	   {
-		ModelAndView model2 = new ModelAndView("retrieve");  //if it is error send it back to retrieve.jsp 
-		model2.addObject("headerMsg", "Enter the correct format");  
-		return model2;	
-	   }
-	  
-	  // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();	   	
-		
-	    model1=usersService1.getUserById(model1);
-		
-		ModelAndView model2 = new ModelAndView("retrieveOutput");
-		model2.addObject("headerMsg", "Your Output is");  
-		
-		model2.addObject("msg",  model1);                                                 
-
-		return model2;
-	}	
-	
-//=================================================================
-	
-	
-	
 	
 	
 	
@@ -257,30 +455,10 @@ public class ControllerFile {
 		
 		return map;
 	}
-	
-	@RequestMapping(value="/validate", method=RequestMethod.POST)
-	public ModelAndView toValidate(User_Info user, BindingResult result)
-	{
-		if(result.hasErrors())
-		   {
-			ModelAndView model2 = new ModelAndView("login");  //if it is error send it back to retrieve.jsp 
-			model2.addObject("message", "Enter the correct format");  
-			return model2;	
-		   }
-		user = userDaoImpl.validate(user);
-		if(user!=null)
-			{return new ModelAndView("project");}
-		else 
-		{	
-			ModelAndView model = new ModelAndView("login");
-			model.addObject("message","Please input the correct username and password");
-			return model;
-		}
-	}
-		
+
 }
 
-//=============================================================
+
 
 
 

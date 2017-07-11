@@ -18,11 +18,18 @@
     <link href="${morrisCSS }" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="${customfontCSS }" rel="stylesheet" type="text/css">
+
 	<!--  jQuery -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
 	<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
 	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!--  jQuery Validation -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
 
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>

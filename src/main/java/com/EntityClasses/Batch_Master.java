@@ -1,10 +1,6 @@
 package com.EntityClasses;
 
-import java.security.Timestamp;
-import java.util.Set;
-
-
-
+import java.sql.Timestamp;
 public class Batch_Master {
 	private int id;
 	private int semester_id;

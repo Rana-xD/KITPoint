@@ -5,7 +5,7 @@
  	<class name="com.EntityClasses.Semester_Master" table="semester_master">
  	 	
  	 <id name="id" column="id" >    
- 	    <generator class="assigned"/>    
+ 	    <generator class="identity"/>    
  	 </id>
  	 	
     <property name="semester"  column="semester"/>

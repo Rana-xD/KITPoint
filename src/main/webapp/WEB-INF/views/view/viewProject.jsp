@@ -1,4 +1,5 @@
- <script type="text/javascript">
+
+<script type="text/javascript">
 	load = function(){	
 		$.ajax({
 			url:'getProject',
@@ -46,6 +47,7 @@
 			}				
 		});	
 	}
+
 	
 	$(document).ready(function(){
 	    $(".approve_project").click(function(){
@@ -56,6 +58,19 @@
 	        $("p").show();
 	    });
 	});
+
+	showProjectBasedStatus=function (status){
+		var x = document.getElementsByTagName("DIV")[0].getAttribute("data-project-status"); 
+		if (status=='all'){
+			
+		}
+		else if (status!=x)
+		{
+			div.style.display = "none";
+		}
+		
+	}
+
 </script>
 <body onload="load();">
 	    <div class="navbar navbar-default">
@@ -71,12 +86,22 @@
                                 <li value ="Pending Project"><a>Pending Project</a>
                                 </li>
                                 <li value ="Completed Project"><a>Completed Project</a>
+=======
+                                <li value ="Approved Project"><a href="#about">Approved Project</a>
+                                </li>
+                                <li value ="To approve Project"><a href="#contact">To approve Project</a>
+                                </li>
+                                <li value ="Pending Project"><a href="#contact">Pending Project</a>
+                                </li>
+                                <li value ="Completed Project"><a href="#contact">Completed Project</a>
                                 </li>
                             </ul>
                         </div>
                         <!--/.nav-collapse -->
                     </div>
                 </div>
+                <a href="projectDetail" class="btn btn-default">Create</a>
+                <br><br>
                 <div class="row">
                 
                 <div id="project">
@@ -88,3 +113,5 @@
                 
                
                 
+
+
