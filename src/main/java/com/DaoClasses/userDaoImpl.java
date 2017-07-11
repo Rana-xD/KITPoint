@@ -401,7 +401,7 @@ public class userDaoImpl implements usersDao{
         return true;
     }
 //=================================Save project=========================================
-    public static int saveProject(Project_Model project) throws ParseException
+    public static boolean saveProject(Project_Model project) throws ParseException
     {
     	Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -430,9 +430,9 @@ public class userDaoImpl implements usersDao{
     		pm.setDeadline(deadline);
     		pm.setCreated_at(created_at);
     		session.save(pm); 
-    	    int id = pm.getId();
+    	    //int id = pm.getId();
     		session.getTransaction().commit();
-    		return id;
+    		
     		
         } catch (RuntimeException e) {
         	if (trns != null) {
@@ -440,12 +440,12 @@ public class userDaoImpl implements usersDao{
             }
             e.printStackTrace();
             System.out.println("Catch runs");
-            return 0;
+            return false;
         } finally {
             session.flush();
             session.close();
         }
-        
+        return true;
     }
 //=================================Save Stage==================================================
     public static void saveStage(int projectid, int arr[])
