@@ -123,7 +123,7 @@ public class ControllerFile {
 					return map;
 			}
 			
-//============================Retreive all users and ProjectCategory and Project Stages from DB send through Ajax========================
+//============================Retreive all users and ProjectCategory from DB send through Ajax========================
 			@RequestMapping(value="/userNProjectCategoryListNStage", method=RequestMethod.POST)
 			public @ResponseBody Map<String,?> getUserNProjectCategoryListNStage(){
 						
@@ -132,9 +132,9 @@ public class ControllerFile {
 				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
 					List<Project_Category_Master> listProjectCategory = userDaoImpl.getProjectCategories();
 					List<User_Info> listUser = userDaoImpl.getAllUser();
-					List<Project_Stage_Master> listProjectStage = userDaoImpl.getAllStages();
+					//List<Project_Stage_Master> listProjectStage = userDaoImpl.getAllStages();
 					 		
-					if (listProjectCategory == null || listUser == null ||listProjectStage ==null)
+					if (listProjectCategory == null || listUser == null)
 						{
 							error.put("message","Data not found");
 							return error;
@@ -144,20 +144,17 @@ public class ControllerFile {
 						{
 							map.put("category", listProjectCategory);
 							map.put("user", listUser);
-							map.put("stage",listProjectStage);
+							//map.put("stage",listProjectStage);
 							return map;
 						}	
 					}
 //========================Save Project========================================================
 			@RequestMapping(value="/saveProject", method=RequestMethod.POST)
 			public @ResponseBody Map<String,Object> toSaveProject(Project_Model pm) throws ParseException{
-	        		int[] s = pm.getStage();
+	        		//int[] s = pm.getStage();
 					Map<String,Object> map = new HashMap<String,Object>();				
-					int id = userDaoImpl.saveProject(pm);
-					System.out.println("ID IS"+id);
-					if(id!=0)
+					if(userDaoImpl.saveProject(pm))
 					{
-						userDaoImpl.saveStage(id,s);
 						map.put("status","200");
 						map.put("message","Your record has been saved successfully");
 						return map;

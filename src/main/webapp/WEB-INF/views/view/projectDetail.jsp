@@ -31,14 +31,14 @@
 				console.log(response);
 				category = response.category;
 				user = response.user;
-				stage = response.stage;
+<%--				stage = response.stage;	--%>
 				for(i=0; i<category.length; i++)					
 					$("#projectcategory").append("<option value="+category[i].id+">"+category[i].name+" </option>");
-				for (i = 0; i < stage.length; i++) {
+<%--				for (i = 0; i < stage.length; i++) {
     			var checkBox = $('<input class="checkbox" type="checkbox" value="'+stage[i].id+'"><label for="checkbox">'+stage[i].stage_name+'</label><br />');
     			checkBox.appendTo('#stage');
     
-}
+}	--%>
 				for(i=0; i<user.length; i++){
 					if(user[i].user_type=="t")
 					$("#projectcoordinator").append("<option value="+user[i].id+">"+user[i].name+" </option>");
@@ -125,7 +125,7 @@
                                 	<input class="form-control" name="date" id="deadline" placeholder="MM/DD/YYY" type="text"/>
                                 </div>
                         </div>
-                                 <div class="form-group">
+<%--                                  <div class="form-group">
                                 <label class="col-sm-4 control-label">Project Stage</label>
 	                            <div class="col-sm-8">
 	                            
@@ -133,7 +133,7 @@
 	                   					
 	                            </div>
 	                            </div>
-                            </div>
+                            </div>		--%>
                             
                               <div class="form-group">
                                 <label class="col-sm-4 control-label">Skill Set</label>
@@ -173,11 +173,11 @@
                         date_input.datepicker(options);
                   	 
                     	$("#btnSubmit").click(function(){		 
-                    		var val = [];
+<%--                    		var val = [];
                             $('.checkbox:checked').each(function(i){
                               val[i] = $(this).val();
-                            });
-                            console.log("Name is: "+$("#project_name").val());	
+                            });		
+                            console.log("Name is: "+$("#project_name").val());	--%>
                             
                     		$.ajax({
                     		url:'saveProject',
@@ -193,8 +193,8 @@
                     					kit_point:$("#kitpoint").val(),
                     					deadline:$("#deadline").val(),
                     					start_date:$("#startdate").val(),
-                    					end_date:$("#enddate").val(),
-                    					stage:val,},
+                    					end_date:$("#enddate").val()
+                    				<%--stage:val,--%>},
                     		traditional: true,			
                     		success: function(response){
                     				if(response.status=="200")
