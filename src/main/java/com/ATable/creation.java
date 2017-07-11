@@ -42,4 +42,19 @@ public class creation
 
 
 
+//C:\oraclexe\app\oracle\product\10.2.0\server\jdbc\lib   --location of jdbc jar file 
+
+
+/*
+
+3 statement objects are available
+
+1- Statement
+2- prepared statement 
+3- callable statement
+
+
+prepared statement is much faster than other statements and secure too.
+
+*/
 
