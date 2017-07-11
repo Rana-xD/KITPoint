@@ -21,19 +21,19 @@ public class Project_Model {
 	private String end_date;
 	private Timestamp created_at;
 	private Timestamp updated_at;
-	private int stage[];
+	//private int stage[];
 	
 	
 	
 	public int getId() {
 		return id;
 	}
-	public int[] getStage() {
-		return stage;
-	}
-	public void setStage(int[] stage) {
-		this.stage = stage;
-	}
+//	public int[] getStage() {
+//		return stage;
+//	}
+//	public void setStage(int[] stage) {
+//		this.stage = stage;
+//	}
 	public void setId(int id) {
 		this.id = id;
 	}
