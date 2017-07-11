@@ -13,25 +13,6 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 //import org.springframework.stereotype.Service;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Project_Category_Master;
 import com.EntityClasses.Project_Master;
@@ -93,8 +74,19 @@ public class userDaoImpl implements usersDao{
 
     public boolean addUser2(User_Info user) {
         Transaction trns = null;
+        int id=user.getBatch();
         Session session = HibernateUtil.getSessionFactory().openSession();
+        Timestamp created_at= new Timestamp(System.currentTimeMillis()); 
+ 	   
         try {
+
+            String queryString = "from Batch_Master where id = :id";
+            Query query = session.createQuery(queryString);
+            query.setInteger("id", id);
+            Batch_Master batch=(Batch_Master)query.uniqueResult();
+            int semester =batch.getSemester_id();
+            user.setSemester(semester);
+            user.setCreated_at(created_at);
             trns = session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();

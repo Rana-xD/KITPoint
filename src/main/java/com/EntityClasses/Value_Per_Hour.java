@@ -1,6 +1,6 @@
 package com.EntityClasses;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Value_Per_Hour {
 		private int id;
@@ -9,6 +9,14 @@ public class Value_Per_Hour {
 		private int value;
 		private Timestamp created_at;
 		private Timestamp updated_at;
+		
+
+
+
+		public Value_Per_Hour() {
+			
+		}
+
 		public int getId() {
 			return id;
 		}
@@ -21,12 +29,15 @@ public class Value_Per_Hour {
 		public void setSemester_id(int semester_id) {
 			this.semester_id = semester_id;
 		}
+	
 		public int getBatch_id() {
 			return batch_id;
 		}
+
 		public void setBatch_id(int batch_id) {
 			this.batch_id = batch_id;
 		}
+
 		public int getValue() {
 			return value;
 		}
@@ -45,7 +56,20 @@ public class Value_Per_Hour {
 		public void setUpdated_at(Timestamp updated_at) {
 			this.updated_at = updated_at;
 		}
-		
+		public Value_Per_Hour( int v3 , int hour,Timestamp created_at_date,int b ) {
+			
+			this.semester_id = v3;
+			this.value= hour;
+			this.created_at=created_at_date;
+			this.batch_id=b;
+			
+		}
+	
+		/*@Override
+		public String toString()
+		{
+		 return semester_id+" "+ value	;
+		}*/
 		
 
 }

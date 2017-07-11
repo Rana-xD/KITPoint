@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
 	load = function(){	
 		$.ajax({
@@ -31,9 +32,9 @@
                                         "</div>"+
                                "</div>"+
                             "</div>"+
-                              "<a href=taskDetail?name=kkk>"+
+                              "<a href='#'>"+
                                 "<div class='panel-footer'>"+
-                                    "<span class='pull-left'>"+"View Details</span>"+
+                                    "<span class='pull-left'>View Details</span>"+
                                     "<span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>"+
                                     "<div class='clearfix'></div>"+
                                 "</div>"+
@@ -46,6 +47,18 @@
 			}				
 		});	
 	}
+
+	
+	$(document).ready(function(){
+	    $(".approve_project").click(function(){
+	    	$( "data-project-status" ).filter( "." )
+	    	    ;
+	    });
+	    $(".btn2").click(function(){
+	        $("p").show();
+	    });
+	});
+
 	showProjectBasedStatus=function (status){
 		var x = document.getElementsByTagName("DIV")[0].getAttribute("data-project-status"); 
 		if (status=='all'){
@@ -57,6 +70,7 @@
 		}
 		
 	}
+
 </script>
 <body onload="load();">
 	    <div class="navbar navbar-default">
@@ -65,6 +79,14 @@
                             <ul class="nav navbar-nav" id="project-stage" onclick="showProjectBasedStatus(this.value)">
                                 <li class="active" value="all"><a>ALL</a>
                                 </li>
+                                <li class="approve_project" value ="Approved Project"><a>Approved Project</a>
+                                </li>
+                                <li value ="To approve Project"><a>To approve Project</a>
+                                </li>
+                                <li value ="Pending Project"><a>Pending Project</a>
+                                </li>
+                                <li value ="Completed Project"><a>Completed Project</a>
+=======
                                 <li value ="Approved Project"><a href="#about">Approved Project</a>
                                 </li>
                                 <li value ="To approve Project"><a href="#contact">To approve Project</a>
@@ -85,3 +107,11 @@
                 <div id="project">
                 </div>
          </div>
+
+                
+                
+                
+               
+                
+
+

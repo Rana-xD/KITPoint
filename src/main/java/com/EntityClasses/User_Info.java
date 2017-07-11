@@ -2,7 +2,12 @@ package com.EntityClasses;
 
 import java.sql.Timestamp;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class User_Info {
+
 		private int id;
 		private String name;
 		private int batch;

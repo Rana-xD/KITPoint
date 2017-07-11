@@ -22,7 +22,9 @@ public class creation
             Statement stmt = con.createStatement();
             
             //step4 Excecute the query
-             stmt.executeUpdate("create table User_info(id serial, Name varchar(100), Batch integer, Semester integer, Email varchar(100), Password varchar(100),User_type varchar(100),Created_at timestamp, Updated_at timestamp)");
+             //stmt.executeUpdate(" CREATE SEQUENCE user_id_seq");
+             stmt.executeUpdate("create table Value_per_hour(id serial primary key, Semester_id integer, Batch_id integer, Value integer, Created_at timestamp, Updated_at timestamp)");
+             //    stmt.executeUpdate("ALTER SEQUENCE user_id_seq owned by User_info.id;");
             System.out.println("Success");
 
             //step5 close the connection object  
@@ -38,21 +40,4 @@ public class creation
     }
 }
 
-
-
-//C:\oraclexe\app\oracle\product\10.2.0\server\jdbc\lib   --location of jdbc jar file 
-
-
-/*
-
-3 statement objects are available
-
-1- Statement
-2- prepared statement 
-3- callable statement
-
-
-prepared statement is much faster than other statements and secure too.
-
-*/
 

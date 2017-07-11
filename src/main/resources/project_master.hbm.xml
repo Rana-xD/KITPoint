@@ -15,6 +15,7 @@
     <property name="project_leader" column="project_leader"/>
     <property name="project_member" column="project_member"/>
     <property name="description" column="description"/>
+    <property name="status" column="status"/>
     <property name="initially_planned" column="initially_planned"/>
     <property name="budget" column="budget"/>
     <property name="kit_point" column="kit_point"/>
