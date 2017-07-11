@@ -5,15 +5,31 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">1 KIT Point</label>
                                 <div class="col-sm-10">
-                                <input class="form-control">
+                               		 <input type="text" class="form-control" id="value1" name="value">
                                 </div>
                         </div>
                          <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <button onclick='submit_();' class="btn btn-default">Save</button>
                             <button type="reset" class="btn btn-default">Cancel</button>
 						</div>      
                       </div>
                            
                      </form>
                     </div>
-               
+	<script type="text/javascript">
+	
+	data = "";
+	submit_ = function(){
+		 
+			$.ajax({
+				url:'submit1',
+				type:'POST',
+				data:{value:$('#value1').val()},
+				success: function(response){
+						alert(response.message);
+				}				
+			});			
+	}
+		
+  </script>
+	

@@ -246,6 +246,7 @@ public class ControllerFile {
 	public ModelAndView viewProjectCategory() {
 		return new ModelAndView("viewProjectCaterory");
 	}
+
 //================================Project Category Create============================================
 		@RequestMapping(value="/projectCategoryCreate", method=RequestMethod.POST)
 		public @ResponseBody Map<String,Object> toCreateProjectCategory(Project_Category_Master projectCategoryName){
@@ -371,6 +372,88 @@ public class ControllerFile {
 		model2.addObject("msg", newUser);    //This name will store the value in msg
 
 		return model2;
+	}
+	
+	
+	
+	
+	
+	
+	
+//2.Second Method using Restful API
+	
+//==================Restful API====================================
+	
+	
+	@RequestMapping(value="/allusers", method = RequestMethod.GET)
+	public ModelAndView getPage2(){
+		ModelAndView view =new ModelAndView("allusersOutput");
+		return view;
+	}
+	
+	
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> getAll(){
+				
+		 Map<String,Object> map = new HashMap<String,Object>();
+	
+		   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+			List<User_Info> list = usersService1.getAllUsers();
+			 		
+			if (list != null){
+				map.put("status","200");
+				map.put("message","Data found");
+				map.put("data", list);
+			}else{
+				map.put("status","404");
+				map.put("message","Data not found");			
+			}
+		
+		  return map;
+	}
+	
+	
+ //===========================================================
+	
+	
+	@RequestMapping(value="/add2", method = RequestMethod.GET)
+	public ModelAndView getPage4(){
+		ModelAndView view =new ModelAndView("save");
+		return view;
+	}
+
+	
+	@RequestMapping(value="/addUser", method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> getSaved(User_Info users){
+		
+		Map<String,Object> map = new HashMap<String,Object>();		
+		if(usersService1.addUser2(users)){
+			map.put("status","200");
+			map.put("message","Your record has been saved successfully");
+		}
+		
+		return map;
+	}
+		
+	
+//=========================================================
+
+	@RequestMapping(value="/remove", method = RequestMethod.GET)
+	public ModelAndView getPage5(){
+		ModelAndView view =new ModelAndView("delete");
+		return view;
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> delete(User_Info users){
+		Map<String,Object> map = new HashMap<String,Object>();		
+		 //DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+		if(usersService1.deleteUser(users)){
+			map.put("status","200");
+			map.put("message","Your record has been deleted successfully");
+		}
+		
+		return map;
 	}
 
 }

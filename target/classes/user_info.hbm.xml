@@ -5,7 +5,7 @@
  	<class name="com.EntityClasses.User_Info" table="user_info">
  	 	
  	 <id name="id" column="id" >    
- 	    <generator class="assigned"/>    
+ 	    <generator class="identity"/>    
  	 </id>
     <property name="name" column="name"/>
     <property name="batch" column="batch"/>
