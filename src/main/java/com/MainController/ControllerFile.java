@@ -91,12 +91,7 @@ public class ControllerFile {
 		return new ModelAndView("viewProjectCaterory", "message", message);
 	}
 
-//	=================view Value Per Hour============================
-	@RequestMapping("/valuePerHour")
-	public ModelAndView viewValuePerHour() {
-		String message = "Hello World";
-		return new ModelAndView("viewValuePerHour", "message", message);
-	}
+
 //	=================create new user============================
 	@RequestMapping("/newUser")
 	public ModelAndView createUser() {
@@ -230,11 +225,10 @@ public class ControllerFile {
 	}
 
 	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+	@RequestMapping(value="/addUser", method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> getSaved(User_Info users){
 		
 		Map<String,Object> map = new HashMap<String,Object>();		
-		 //DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
 		if(usersService1.addUser2(users)){
 			map.put("status","200");
 			map.put("message","Your record has been saved successfully");

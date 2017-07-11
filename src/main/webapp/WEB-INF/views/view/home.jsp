@@ -1,20 +1,25 @@
-<html>
-<head>
-</head>
-<body>
+ <script type="text/javascript">
+	load = function(){	
+		$.ajax({
+			url:'getProjectSatge',
+			type:'POST',
+			success: function(response){
+					console.log(response);
+					project_stage = response.listProjectStage;
+					for(i=0; i<project_stage.length; i++){					
+						$("#project_stage").append(" <li><a href="+project_stage[i].id+">"+Project_stage[i].name+" </a> </li>");
+					}
+			}				
+		});
+		
+	}
+</script>
+<body onload="load">
 	    <div class="navbar navbar-default">
                     <div class="container">
                         <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav" id="project_stage">
                                 <li class="active"><a href="#">ALL</a>
-                                </li>
-                                <li><a href="#about">Approved Project</a>
-                                </li>
-                                <li><a href="#contact">To approve Project</a>
-                                </li>
-                                <li><a href="#contact">Pending Project</a>
-                                </li>
-                                <li><a href="#contact">Completed Project</a>
                                 </li>
                                
                             </ul>
@@ -306,10 +311,3 @@
                 
                 </div>
                 
-                
-                
-               
-                   
-                
-</body>
-</html>

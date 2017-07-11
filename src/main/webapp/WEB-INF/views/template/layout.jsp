@@ -10,7 +10,6 @@
   <!-- Bootstrap Core CSS -->
   <spring:url value="/resources/Bootstrap/css/bootstrap.min.css" var="bootatrapCore"/>
   <spring:url value="/resources/Bootstrap/css/sb-admin.css" var="CustomCSS"/>
-  <spring:url value="/resources/Bootstrap/css/plugins/morris.css" var="morrisCSS"/>
 <spring:url value="/resources/Bootstrap/font-awesome/css/font-awesome.min.css" var="customfontCSS"/>
     <link href="${bootatrapCore}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -19,11 +18,11 @@
     <link href="${morrisCSS }" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="${customfontCSS }" rel="stylesheet" type="text/css">
-<!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+	<!--  jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -43,27 +42,10 @@
 		</div>
     
   </div>
-  <script src="/KIT Point Management System/resources/Bootstrap/js/jquery.js"></script>
-
+  	
     <!-- Bootstrap Core JavaScript -->
     <script src="/KIT Point Management System/resources/Bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="/KIT Point Management System/resources/Bootstrap/js/plugins/morris/raphael.min.js"></script>
-    <script src="/KIT Point Management System/resources/Bootstrap/js/plugins/morris/morris.min.js"></script>
-    <script src="/KIT Point Management System/resources/Bootstrap/js/plugins/morris/morris-data.js"></script>
-    <script>
-    $(document).ready(function(){
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-</script>
+
 </body>
 </html>

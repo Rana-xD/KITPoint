@@ -51,7 +51,6 @@
 		<put-attribute name="title" value="setting" />
 		<put-attribute name="body" value="/WEB-INF/views/view/valuePerHour.jsp" />
 	</definition>
-	
 		<definition name="viewKitPoint" extends="base.definition">
 		<put-attribute name="title" value="setting" />
 		<put-attribute name="body" value="/WEB-INF/views/view/kitpoint.jsp" />

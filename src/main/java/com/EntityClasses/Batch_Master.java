@@ -1,6 +1,9 @@
 package com.EntityClasses;
 
 import java.security.Timestamp;
+import java.util.Set;
+
+
 
 public class Batch_Master {
 	private int id;
@@ -8,6 +11,21 @@ public class Batch_Master {
 	private String name;
 	private Timestamp created_at;
 	private Timestamp updated_at;
+	//private Set Children ;
+	public Batch_Master(){
+		
+	}
+	public Batch_Master(int id_data)
+	{
+		this.id=id_data;
+	}
+	
+	/*public Set getChildren() {
+		return Children;
+	}
+	public void setChildren(Set children) {
+		this.Children = children;
+	}*/
 	public int getId() {
 		return id;
 	}
@@ -38,4 +56,5 @@ public class Batch_Master {
 	public void setUpdated_at(Timestamp updated_at) {
 		this.updated_at = updated_at;
 	}
+
 }

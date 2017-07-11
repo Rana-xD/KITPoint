@@ -5,12 +5,13 @@
  	<class name="com.EntityClasses.Batch_Master" table="batch_master">
  	 	
  	 <id name="id" column="id" >    
- 	    <generator class="assigned"/>    
+ 	    <generator class="identity"/>    
  	 </id>
  	 	
     <property name="semester_id"  column="semester_id"  />
     <property name="name" column="name"/>
     <property name="created_at" column="created_at"/>
     <property name="updated_at" column="updated_at"/>
+
  	</class>
 </hibernate-mapping>

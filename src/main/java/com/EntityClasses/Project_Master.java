@@ -13,6 +13,13 @@ public class Project_Master {
 		private int project_leader;
 		private String project_member;
 		private String description;
+		private String status;
+		public String getStatus() {
+			return status;
+		}
+		public void setStatus(String status) {
+			this.status = status;
+		}
 		private int initially_planned;
 		private int budget;
 		private String kit_point;

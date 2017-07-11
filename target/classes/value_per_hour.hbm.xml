@@ -5,12 +5,12 @@
  	<class name="com.EntityClasses.Value_Per_Hour" table="value_per_hour">
  	 	
  	 <id name="id" column="id" >    
- 	    <generator class="assigned"/>    
+ 	    <generator class="identity"/>    
  	 </id>
     <property name="semester_id"  column="semester_id"/>
-    <property name="batch_id" column="batch_id"/>
     <property name="value" column="value"/>
     <property name="created_at" column="created_at"/>
     <property name="updated_at" column="updated_at"/>
+    <property name="batch_id" column="batch_id"/>
  	</class>
 </hibernate-mapping>

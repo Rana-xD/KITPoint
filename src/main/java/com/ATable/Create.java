@@ -17,7 +17,7 @@ public class Create
         	
             //step2 Get the connection from db 
 
-        	Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5433/KITPoint","postgres", "admin");
+        	Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/KITPoint","postgres", "admin");
 
             //step3 create the statement object  
             Statement stmt = con.createStatement();

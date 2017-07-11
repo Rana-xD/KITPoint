@@ -10,7 +10,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;"><i class="fa fa-user"></i> <span >Admin<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;"><i class="fa fa-user"></i> Admin<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="profile"><i class="fa fa-fw fa-user"></i> Profile</a>
