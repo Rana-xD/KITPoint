@@ -33,14 +33,14 @@ load = function(){
 					
 				}
 				$("#batch").change(function(){
-					var x = document.getElementById("batch").value;
+					var batchValue = document.getElementById("batch").value;
 					for(i=0; i<response.batch.length; i++){
-						  if(response.batch[i].id==x)
+						  if(response.batch[i].id==batchValue)
 							  {
-							  x = response.batch[i].semester_id;
+							  batchValue = response.batch[i].semester_id;
 							  }
 					  }
-					$("#semester").val(x);
+					$("#semester").val(batchValue);
 					
 				
 					

@@ -25,7 +25,7 @@
 <script type="text/javascript">
 	load = function(){	
 		$.ajax({
-			url:'userNProjectCategoryListNStage',
+			url:'userNProjectCategoryList',
 			type:'POST',
 			success: function(response){
 				console.log(response);

@@ -17,17 +17,37 @@
   
 </head>
 
-<body>
-<div class="wrapper">
-  <kanban-board title="uie">
-		<kanban-column name="Backlog"></kanban-column>
-		<kanban-column name="To Do"></kanban-column>
-		<kanban-column name="In Progress"></kanban-column>
-		<kanban-column name="DDDD"></kanban-column>
-		<kanban-column name="CCCC"></kanban-column>
-		<kanban-column name="BBB"></kanban-column>
-		<kanban-column name="AAA"></kanban-column>
+
+ <body onload="load();">
+<script type="text/javascript">
+	load = function(){	
+		$.ajax({
+			url:'ProjectNTask',
+			type:'POST',
+			success: function(response){
+				console.log(response);
+				project = response.project;
+				task = response.task;
+				for(i=0;i<project.length;i++)
+				{
+				$("#board").append("<kanban-column name="+project[i].project_name+"></kanban-column>")
+				
+				}
+				
+			},
+		error: function(err){
+			console.log("KKKKKKK");
+			console.log(JSON.stringify(err));
+			}
+			
+		});
+		
+	}
+</script>		
+  <kanban-board title="uie" id="board">
+		
 </kanban-board>
+
 
 <dom-module id="kanban-board">
 		<template>
@@ -53,7 +73,7 @@
 				<section class="wrapper">
 					<content></content>
 				</section>
-				<footer on-click="handleClick">Add Card</footer>
+				<footer><a href="taskDetail">Add Task</a></footer>
 		</template>
 		<script>
 				Polymer({
@@ -64,15 +84,14 @@
 						ready: function() {
 
 						},
-						handleClick: function() {
-								var nameOfCard = prompt('What do you want to name your card?');
-								if(nameOfCard === '') return;
+						handleClick: function(name) {
+								var nameOfCard = name;
 								var card = document.createElement('kanban-card');
 								card.innerHTML = nameOfCard;
 								card.draggable = true;
 								this.getElementsByClassName('wrapper')[0].appendChild(card);
 						}
-				});
+				});	
 		</script>
 </dom-module>
 <dom-module id="kanban-card">
