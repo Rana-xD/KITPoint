@@ -53,9 +53,9 @@ load = function(){
 $(document).ready(function(){
 	$("#btnSubmit").click(function(){		 
 	$.ajax({
-		url:'batchUpdate',
+		url:'updateBatch',
 		type:'POST',
-		data:{name:$("#batch").val(),semester_id:$("#semester").val()},
+		data:{id:$("#batch").val(),semester_id:$("#semester").val()},
 		success: function(response){
 				if(response.status=="200")
 					{
@@ -101,7 +101,7 @@ $(document).ready(function(){
                             </div>
 						  <div class="form-group">
 						    <div class="col-sm-offset-2 col-sm-10">
-						      <button type="submit" id="btnSubmit" class="btn btn-default">Update</button>
+						      <button id="btnSubmit" class="btn btn-default">Update</button>
 						      <button type="reset" class="btn btn-default">Cancel</button>
 						  
 						    </div>

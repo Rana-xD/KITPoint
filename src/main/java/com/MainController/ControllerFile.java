@@ -342,7 +342,24 @@ public class ControllerFile {
 						
 						return map;
 				}
-//================================Save Batch============================================
+//================================Update Batch============================================
+				@RequestMapping(value="/updateBatch", method=RequestMethod.POST)
+				public @ResponseBody Map<String,Object> toUpdateBatch(Batch_Master batch){
+						System.out.println("Name in controller "+batch.getName()+" "+batch.getSemester_id());
+						Map<String,Object> map = new HashMap<String,Object>();				
+						if(userDaoImpl.updateBatch(batch)){
+							map.put("status","200");
+							map.put("message","Your record has been saved successfully");
+							return map;
+						}
+						else {
+							System.out.println("Else Runs");
+							map.put("status","999");
+							map.put("message","Your record already existed");
+							return map;
+						}
+					}
+				//================================Save Batch============================================
 				@RequestMapping(value="/batchSubmit", method=RequestMethod.POST)
 				public @ResponseBody Map<String,Object> toCreateProjectCategory(Batch_Master batch){
 						
@@ -361,7 +378,8 @@ public class ControllerFile {
 						}
 					}
 
-//===================Update Batch======================================
+
+//===================View Update Batch======================================
 	@RequestMapping("/updateBatch")
 	public ModelAndView updateBatch() {
 		return new ModelAndView("updateBatch");
