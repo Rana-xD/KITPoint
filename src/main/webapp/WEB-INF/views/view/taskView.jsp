@@ -108,6 +108,7 @@
   
 </head>
 
+<<<<<<< HEAD
 <body>
 	<div class="project-list__wrapper">
 		<div class="inner">
@@ -336,5 +337,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

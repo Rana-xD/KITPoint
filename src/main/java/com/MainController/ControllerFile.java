@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.DaoClasses.userDaoImpl;
 import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Login;
@@ -35,6 +36,7 @@ import com.EntityClasses.Project_Category_Master;
 import com.EntityClasses.Project_Master;
 import com.EntityClasses.Project_Stage_Master;
 import com.EntityClasses.Semester_Master;
+import com.EntityClasses.Task_Master;
 import com.EntityClasses.User;
 import com.EntityClasses.User_Info;
 import com.ModelClasses.Project_Model;
@@ -106,34 +108,42 @@ public class ControllerFile {
 					
 					return map;
 			}
-//============================Get Project========================
-			@RequestMapping(value="/getProject", method=RequestMethod.POST)
-			public @ResponseBody Map<String,Object> getProject(){
-						
-				 Map<String,Object> map = new HashMap<String,Object>();
-			
-				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
-					List<Project_Master> list = userDaoImpl.getAllProject();
-					 		
-					if (list != null)
-						map.put("project", list);
-					else
-						map.put("message","Data not found");			
-					
-					return map;
-			}
-			
-//============================Retreive all users and ProjectCategory from DB send through Ajax========================
-			@RequestMapping(value="/userNProjectCategoryListNStage", method=RequestMethod.POST)
-			public @ResponseBody Map<String,?> getUserNProjectCategoryListNStage(){
+//============================Get Project AND Task========================
+			@RequestMapping(value="/ProjectNTask", method=RequestMethod.POST)
+			public @ResponseBody Map<String,?> getProjectNTask(){
 						
 				 Map<String,List> map = new HashMap<String,List>();
+				 Map<String,Object> error = new HashMap<String,Object>();
+				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+					List<Project_Master> listProject = userDaoImpl.getAllProject();
+					List<Task_Master> listTask = userDaoImpl.getAllTask();
+					 		
+					if (listProject == null || listTask == null)
+						{
+							error.put("message","Data not found");
+							return error;
+						}
+						
+					else
+						{
+							map.put("task", listTask);
+							map.put("project", listProject);
+							return map;
+						}	
+					}
+			
+//============================Retreive all users and ProjectCategory from DB send through Ajax========================
+			@RequestMapping(value="/userNProjectCategoryList", method=RequestMethod.POST)
+			public @ResponseBody Map<?,?> getUserNProjectCategoryListNStage(@RequestParam("id") int id) throws ParseException{
+				System.out.println("Id is"+id);
+				 Project_Master project = userDaoImpl.getProjectByUserId(id);
+				 Map<String,Object> map = new HashMap<String,Object>();
 				 Map<String,Object> error = new HashMap<String,Object>();
 				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
 					List<Project_Category_Master> listProjectCategory = userDaoImpl.getProjectCategories();
 					List<User_Info> listUser = userDaoImpl.getAllUser();
 					//List<Project_Stage_Master> listProjectStage = userDaoImpl.getAllStages();
-					 		
+					System.out.println("Current project is "+project);	
 					if (listProjectCategory == null || listUser == null)
 						{
 							error.put("message","Data not found");
@@ -144,6 +154,7 @@ public class ControllerFile {
 						{
 							map.put("category", listProjectCategory);
 							map.put("user", listUser);
+							map.put("currentproject",project);
 							//map.put("stage",listProjectStage);
 							return map;
 						}	
@@ -154,6 +165,24 @@ public class ControllerFile {
 	        		//int[] s = pm.getStage();
 					Map<String,Object> map = new HashMap<String,Object>();				
 					if(userDaoImpl.saveProject(pm))
+					{
+						map.put("status","200");
+						map.put("message","Your record has been saved successfully");
+						return map;
+					}
+					else {
+						System.out.println("Else Runs");
+						map.put("status","999");
+						map.put("message","Failed");
+						return map;
+					}
+				}
+//========================Update Project========================================================
+			@RequestMapping(value="/updateProject", method=RequestMethod.POST)
+			public @ResponseBody Map<String,Object> toUpdateProject(Project_Model pm) throws ParseException{
+	        		//int[] s = pm.getStage();
+					Map<String,Object> map = new HashMap<String,Object>();				
+					if(userDaoImpl.updateProject(pm))
 					{
 						map.put("status","200");
 						map.put("message","Your record has been saved successfully");
@@ -178,6 +207,7 @@ public class ControllerFile {
 		//String message = "Hello World";
 		return new ModelAndView("taskView");
 	}
+	
 //==================get Project and User===========================
 	@RequestMapping(value="/ProjectNUser", method=RequestMethod.POST)
 	public @ResponseBody Map<String,?> getProjectNUser(){
@@ -220,6 +250,7 @@ public class ControllerFile {
 				return map;
 			}
 		}
+
 //	=================setting============================
 	@RequestMapping("/setting")
 	public ModelAndView viewSetting() {
@@ -295,6 +326,22 @@ public class ControllerFile {
 				
 				return map;
 		}
+//============================Retreive all users from DB send through Ajax========================
+				@RequestMapping(value="/allUser", method=RequestMethod.POST)
+				public @ResponseBody Map<String,Object> getAllUser(){
+							
+					 Map<String,Object> map = new HashMap<String,Object>();
+				
+					   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
+						List<User_Info> list = userDaoImpl.getAllUser();
+						 		
+						if (list != null)
+							map.put("data", list);
+						else
+							map.put("message","Data not found");			
+						
+						return map;
+				}
 //================================Save Batch============================================
 				@RequestMapping(value="/batchSubmit", method=RequestMethod.POST)
 				public @ResponseBody Map<String,Object> toCreateProjectCategory(Batch_Master batch){
@@ -447,6 +494,10 @@ public class ControllerFile {
 		
 		return map;
 	}
+	@RequestMapping(value="/updateProjectDetail", method = RequestMethod.GET)
+	public ModelAndView updateProjectDetail(){
+		ModelAndView view =new ModelAndView("updateProjectDetail");
+		return view;}
 
 }
 

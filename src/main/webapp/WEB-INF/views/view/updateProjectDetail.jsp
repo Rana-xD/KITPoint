@@ -25,26 +25,55 @@
 <script type="text/javascript">
 	load = function(){	
 		$.ajax({
-			url:'userNProjectCategoryListNStage',
+			url:'userNProjectCategoryList?id=57',
 			type:'POST',
 			success: function(response){
 				console.log(response);
 				category = response.category;
 				user = response.user;
-				stage = response.stage;
+				currentproject = response.currentproject;
+				function formatDate(date) {
+				    var d = new Date(date),
+				        month = '' + (d.getMonth() + 1),
+				        day = '' + d.getDate(),
+				        year = d.getFullYear();
+
+				    if (month.length < 2) month = '0' + month;
+				    if (day.length < 2) day = '0' + day;
+
+				    return [month, day, year].join('/');
+				};
+				currentproject.start_date=formatDate(currentproject.start_date);
+				currentproject.end_date=formatDate(currentproject.end_date);
+				currentproject.deadline=formatDate(currentproject.deadline);
+				
+<%--				stage = response.stage;	--%>
 				for(i=0; i<category.length; i++)					
 					$("#projectcategory").append("<option value="+category[i].id+">"+category[i].name+" </option>");
-				for (i = 0; i < stage.length; i++) {
+<%--				for (i = 0; i < stage.length; i++) {
     			var checkBox = $('<input class="checkbox" type="checkbox" value="'+stage[i].id+'"><label for="checkbox">'+stage[i].stage_name+'</label><br />');
     			checkBox.appendTo('#stage');
     
-}
+}	--%>
 				for(i=0; i<user.length; i++){
 					if(user[i].user_type=="t")
 					$("#projectcoordinator").append("<option value="+user[i].id+">"+user[i].name+" </option>");
 					else if(user[i].user_type=="s")
 					$("#teamleader").append("<option value="+user[i].id+">"+user[i].name+" </option>");
 				}
+				$("#project_name").val(currentproject.project_name);
+				$("#projectcode").val(currentproject.project_code);
+				$("#projectcategory").val(currentproject.project_type);
+				$("#projectcoordinator").val(currentproject.project_co);
+				$("#teamleader").val(currentproject.project_leader);
+				$("#planninghour").val(currentproject.initially_planned);
+				$("#budget").val(currentproject.budget);
+				$("#skillset").val(currentproject.skillset);
+				$("#kitpoint").val(currentproject.kit_point);
+				$("#deadline").val(currentproject.deadline);
+				$("#startdate").val(currentproject.start_date);
+				$("#enddate").val(currentproject.end_date);
+				
 			},
 		error: function(err){
 			console.log("KKKKKKK");
@@ -125,7 +154,7 @@
                                 	<input class="form-control" name="date" id="deadline" placeholder="MM/DD/YYY" type="text"/>
                                 </div>
                         </div>
-                                 <div class="form-group">
+<%--                                  <div class="form-group">
                                 <label class="col-sm-4 control-label">Project Stage</label>
 	                            <div class="col-sm-8">
 	                            
@@ -133,7 +162,7 @@
 	                   					
 	                            </div>
 	                            </div>
-                            </div>
+                            </div>		--%>
                             
                               <div class="form-group">
                                 <label class="col-sm-4 control-label">Skill Set</label>
@@ -154,7 +183,7 @@
                                 </div>
                             </div>
                           	 <div class="ol-sm-offset-2 col-sm-10">	
-			                   <button id="btnSubmit" class="btn btn-default">Create</button>
+			                   <button id="btnSubmit" class="btn btn-default">Update</button>
 			                   <button type="reset" class="btn btn-default">Cancel</button>
 	                    </div>
                   		  </div>
@@ -173,16 +202,17 @@
                         date_input.datepicker(options);
                   	 
                     	$("#btnSubmit").click(function(){		 
-                    		var val = [];
+<%--                    		var val = [];
                             $('.checkbox:checked').each(function(i){
                               val[i] = $(this).val();
-                            });
-                            console.log("Name is: "+$("#project_name").val());	
+                            });		
+                            console.log("Name is: "+$("#project_name").val());	--%>
                             
                     		$.ajax({
-                    		url:'saveProject',
+                    		url:'updateProject',
                     		type:'POST',
-                    		data:{		project_name:$("#project_name").val(),
+                    		data:{		id:57,
+                    					project_name:$("#project_name").val(),
                     					project_code:$("#projectcode").val(),
                     					project_type:$("#projectcategory").val(),
                     					project_co:$("#projectcoordinator").val(),
@@ -193,8 +223,8 @@
                     					kit_point:$("#kitpoint").val(),
                     					deadline:$("#deadline").val(),
                     					start_date:$("#startdate").val(),
-                    					end_date:$("#enddate").val(),
-                    					stage:val,},
+                    					end_date:$("#enddate").val()
+                    				<%--stage:val,--%>},
                     		traditional: true,			
                     		success: function(response){
                     				if(response.status=="200")

@@ -1,6 +1,7 @@
 package com.DaoClasses;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 //import org.springframework.stereotype.Service;
+
 
 import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Project_Category_Master;
@@ -342,7 +344,6 @@ public class userDaoImpl implements usersDao{
             Query query = session.createQuery(queryString);
             query.setString("name",projectCategory.getName());
             projectCategory=(Project_Category_Master)query.uniqueResult();
-            System.out.println("projectCategory is"+projectCategory);
     			if(projectCategory!=null)
     				return false;
     		Timestamp created_at = new Timestamp(System.currentTimeMillis());
@@ -430,6 +431,55 @@ public class userDaoImpl implements usersDao{
     		pm.setDeadline(deadline);
     		pm.setCreated_at(created_at);
     		session.save(pm); 
+    	    //int id = pm.getId();
+    		session.getTransaction().commit();
+    		
+    		
+        } catch (RuntimeException e) {
+        	if (trns != null) {
+                trns.rollback();
+            }
+            e.printStackTrace();
+            System.out.println("Catch runs");
+            return false;
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return true;
+    }
+//=================================Update project=========================================
+    public static boolean updateProject(Project_Model project) throws ParseException
+    {
+    	Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        try {
+        	
+            trns = session.beginTransaction();
+    		Timestamp created_at = new Timestamp(System.currentTimeMillis());
+    		Date start_date = new SimpleDateFormat("MM/dd/yyyy").parse(project.getStart_date());
+    		Date end_date = new SimpleDateFormat("MM/dd/yyyy").parse(project.getEnd_date());
+    		Date deadline = new SimpleDateFormat("MM/dd/yyyy").parse(project.getDeadline());
+    		Project_Master pm = new Project_Master();
+    		System.out.println("ID in DAO is "+project.getId());
+    		pm.setId(project.getId());
+    		pm.setProject_name(project.getProject_name());
+    		pm.setProject_code(project.getProject_code());
+    		pm.setSkillset(project.getSkillset());
+    		pm.setProject_type(project.getProject_type());
+    		pm.setProject_co(project.getProject_co());
+    		pm.setProject_leader(project.getProject_leader());
+    		pm.setProject_member(project.getProject_member());
+    		pm.setDescription(project.getDescription());
+    		pm.setInitially_planned(project.getInitially_planned());
+    		pm.setBudget(project.getBudget());
+    		pm.setKit_point(project.getKit_point());
+    		pm.setStart_date(start_date);
+    		pm.setEnd_date(end_date);
+    		pm.setDeadline(deadline);
+    		pm.setCreated_at(created_at);
+    		session.update(pm); 
     	    //int id = pm.getId();
     		session.getTransaction().commit();
     		
@@ -569,8 +619,56 @@ public class userDaoImpl implements usersDao{
         }
         return stages;
     }  
-
-	
+//===========================Get all task===================================
+    public static List<Task_Master> getAllTask()
+    {
+    	List<Task_Master> tasks= new ArrayList<Task_Master>();
+        Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            tasks = session.createQuery("from Task_Master").list();
+            //System.out.println(semesters);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return tasks;
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return tasks;
+    }
+//==================Get project by id=======================
+    public static Project_Master getProjectByUserId(int id) throws ParseException
+    {
+    	Project_Master project= new Project_Master();
+        Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString = "from Project_Master where id=:id";
+            Query query = session.createQuery(queryString);
+            query.setInteger("id",id);
+            project=(Project_Master)query.uniqueResult();
+//            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+//            String s_date = df.format(project.getStart_date());
+//            String e_date = df.format(project.getEnd_date());
+//            String dline = df.format(project.getDeadline());
+//            Date start_date = new SimpleDateFormat("MM/dd/yyyy").parse(s_date);
+//    		Date end_date = new SimpleDateFormat("MM/dd/yyyy").parse(e_date);
+//    		Date deadline = new SimpleDateFormat("MM/dd/yyyy").parse(dline);
+//    		project.setStart_date(start_date);
+//    		project.setEnd_date(end_date);
+//    		project.setDeadline(deadline);            
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return project;
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return project;
+    }  
     
   //===========================================================  
     
