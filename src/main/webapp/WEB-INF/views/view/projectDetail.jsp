@@ -108,19 +108,19 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Start Date</label>
                                 <div class="col-sm-8">
-                                	<input class="form-control" id="startdate"  name="date" placeholder="MM/DD/YYY" type="text"/>
+                                	<input class="form-control" id="startdate"  name="date" placeholder="MM/DD/YYY" type="text" required/>
                                 </div>
                             </div>
     					 <div class="form-group">
                                 <label class="col-sm-4 control-label">End Date</label>
                               	<div class="col-sm-8">
-                              		<input class="form-control" id="enddate"  name="date" placeholder="MM/DD/YYY" type="text"/>
+                              		<input class="form-control" id="enddate"  name="date" placeholder="MM/DD/YYY" type="text" required/>
                               	</div>
                             </div>
                                  <div class="form-group ">
                                 <label class="col-sm-4 control-label">Deadline</label>
                                 <div class="col-sm-8">
-                                	<input class="form-control" name="date" id="deadline" placeholder="MM/DD/YYY" type="text"/>
+                                	<input class="form-control" name="date" id="deadline" placeholder="MM/DD/YYY" type="text" required/>
                                 </div>
                         </div>
 <%--                                  <div class="form-group">
@@ -136,7 +136,7 @@
                               <div class="form-group">
                                 <label class="col-sm-4 control-label">Skill Set</label>
                                 <div class="col-sm-8">
-                                	<input class="form-control" id="skillset">
+                                	<input class="form-control" id="skillset" type="text" required>
                                 </div>
                             </div> 
                              <div class="form-group">
@@ -162,8 +162,6 @@
      </form>              
                     <script>
                     $(document).ready(function(){
-                    	$("#myForm").on('submit',function(e){
-                    		e.preventDefault();
                     	var date_input=$('input[name="date"]');
                         var options={
                           format: 'mm/dd/yyyy',
@@ -171,6 +169,9 @@
                           autoclose: true,
                         };
                         date_input.datepicker(options);
+                    	$("#myForm").on('submit',function(e){
+                    		e.preventDefault();
+                    	
                         if($("#myForm").validate())
             			{
                         	$.ajax({
