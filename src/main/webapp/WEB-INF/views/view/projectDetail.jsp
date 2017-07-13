@@ -162,6 +162,8 @@
      </form>              
                     <script>
                     $(document).ready(function(){
+                    	$("#myForm").on('submit',function(e){
+                    		e.preventDefault();
                     	var date_input=$('input[name="date"]');
                         var options={
                           format: 'mm/dd/yyyy',
@@ -208,7 +210,7 @@
                         		
                         			});	
             			}
-            		
+                    	});	
             	});
                     	<%-- $("#btnSubmit").click(function(){		 
                    		var val = [];
