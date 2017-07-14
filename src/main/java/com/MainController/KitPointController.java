@@ -26,18 +26,7 @@ public class KitPointController {
 	
 @Autowired
 kitPointDao valueKitPoint;	
-	/*@RequestMapping(value="/save", method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> getSaved(KIT_Point kitPoint){
-		
-		Map<String,Object> map = new HashMap<String,Object>();		
-		 //DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
-		if(valueKitPoint.addPointValue(kitPoint)){
-			map.put("status","200");
-			map.put("message","Your record has been saved successfully");
-		}
-		
-		return map;
-	}*/
+
 		@RequestMapping(value="/submitpoint", method=RequestMethod.POST)                                            
 		public ModelAndView Submit(KIT_Point newKitPoint,BindingResult result)        
 		{                                                                                                
@@ -62,7 +51,7 @@ kitPointDao valueKitPoint;
 			
 			Map<String,Object> map = new HashMap<String,Object>();		
 			
-			if(valueKitPoint.addPointValue(newKitPoint)){
+			if(valueKitPoint.createOrUpdate(newKitPoint)){
 				map.put("status","200");
 				map.put("message","Your record has been saved successfully");
 			}

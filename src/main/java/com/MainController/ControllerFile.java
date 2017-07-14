@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.DaoClasses.userDaoImpl;
 import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Login;
@@ -37,6 +38,7 @@ import com.EntityClasses.Project_Stage_Master;
 import com.EntityClasses.Semester_Master;
 import com.EntityClasses.User;
 import com.EntityClasses.User_Info;
+import com.ModelClasses.ProjectForViewModel;
 import com.ModelClasses.Project_Model;
 import com.ModelClasses.Task_Model;
 import com.ModelClasses.retrieve;
@@ -107,13 +109,13 @@ public class ControllerFile {
 					return map;
 			}
 //============================Get Project========================
-			@RequestMapping(value="/getProject", method=RequestMethod.POST)
+			@RequestMapping(value="/getProject1", method=RequestMethod.POST)
 			public @ResponseBody Map<String,Object> getProject(){
 						
 				 Map<String,Object> map = new HashMap<String,Object>();
 			
 				   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
-					List<Project_Master> list = userDaoImpl.getAllProject();
+					List<ProjectForViewModel> list = userDaoImpl.getAllProject();
 					 		
 					if (list != null)
 						map.put("project", list);
@@ -185,7 +187,7 @@ public class ControllerFile {
 		 Map<String,List> map = new HashMap<String,List>();
 		 Map<String,Object> error = new HashMap<String,Object>();
 		   // DaoClasses.userDaoImpl dao = new DaoClasses.userDaoImpl();
-			List<Project_Master> listProject = userDaoImpl.getAllProject();
+			List<ProjectForViewModel> listProject = userDaoImpl.getAllProject();
 			List<User_Info> listUser = userDaoImpl.getAllUser();
 			 		
 			if (listProject == null || listUser == null)

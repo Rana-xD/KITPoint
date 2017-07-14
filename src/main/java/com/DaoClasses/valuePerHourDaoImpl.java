@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 
 import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Project_Master;
@@ -71,6 +75,7 @@ public class valuePerHourDaoImpl implements valuePerHourDao {
     trns = session.beginTransaction();
     batch = session.createQuery("from Batch_Master").list();
     
+    
    } catch (RuntimeException e) {
     e.printStackTrace();
     return batch;
@@ -88,6 +93,7 @@ public class valuePerHourDaoImpl implements valuePerHourDao {
    try {
     trns = session.beginTransaction();
     project_Stage = session.createQuery("from Project_Stage_Master").list();
+    
    } catch (RuntimeException e) {
     e.printStackTrace();
     return project_Stage;
@@ -98,13 +104,21 @@ public class valuePerHourDaoImpl implements valuePerHourDao {
    return project_Stage;
   }
   /*=====================  show Project data ============================*/
- public static List < Project_Master > getAllProjectData() {
-  List < Project_Master > project = new ArrayList < Project_Master > ();
+ public static List <Project_Master> getAllProjectData() {
+ 
   Transaction trns = null;
-  Session session = HibernateUtil.getSessionFactory().openSession();
-  try {
+  Session session =  HibernateUtil.getSessionFactory().openSession();
+  List<Project_Master> project = null;
+try {
    trns = session.beginTransaction();
-   project = session.createQuery("from Project_Master").list();
+
+   Criteria criteria=session.createCriteria(Project_Master.class);
+   criteria.setProjection(Projections.projectionList()
+		   .add(Projections.rowCount())
+		   .add(Projections.groupProperty("id")));
+   //String hql = "from Project_Master as project inner join proejct.tasks as emp";
+   
+  project =  criteria.list();
   } catch (RuntimeException e) {
    e.printStackTrace();
    return project;
@@ -114,6 +128,49 @@ public class valuePerHourDaoImpl implements valuePerHourDao {
   }
   return project;
  }
+ /*=====================  show Project data ============================*/
+public static List<?> countAllTask() {
+		 Transaction trns = null;
+		 Session session = HibernateUtil.getSessionFactory().openSession();
+		 List<?> project;
+		try {
+		  trns = session.beginTransaction();
+		  String queryString="Select Project_Master, task.project_id from Task_Master as task join task.project_id as project ";//group by project.id ";
+		  Query query=session.createQuery(queryString);
+		  project=query.list();
+		  
+		} 
+		 catch (RuntimeException e) {
+		  e.printStackTrace();
+		  return null;
+		 } finally {
+		  session.flush();
+		  session.close();
+		 }
+		 return project ;
+}
+ /*=====================  show Project data by status============================*/
+public static List < Project_Master > getProjectBasedOnStatus(String statusData) {
+ List < Project_Master > project = new ArrayList < Project_Master > ();
+ Transaction trns = null;
+ Session session = HibernateUtil.getSessionFactory().openSession();
+ try {
+  trns = session.beginTransaction();
+  String queryString= "from Project_Master where status=:statusData";
+  Query query=session.createQuery(queryString);
+  query.setString("statusData", statusData);
+ // project = session.createQuery("from Project_Master where status:statusData").list();
+  project=query.list();
+ 
+ } catch (RuntimeException e) {
+  e.printStackTrace();
+  return project;
+ } finally {
+  session.flush();
+  session.close();
+ }
+ return project;
+}
  public Value_Per_Hour addPointValue1(Value_Per_Hour model1) {
   // TODO Auto-generated method stub
   return null;

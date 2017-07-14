@@ -3,6 +3,7 @@ package com.DaoClasses;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,53 @@ public class kitPointDaoImpl implements kitPointDao {
 		return true;
 	}
 
+	public boolean createOrUpdate(KIT_Point kitPoint)
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String queryString = "from KIT_Point";
+	    Query query = session.createQuery(queryString);
+	    KIT_Point Point = (KIT_Point) query.uniqueResult();
+		try {
+		if (Point==null)
+		{
+			return addPointValue(kitPoint);
+		}
+		else {
+			return updateKITPoint(kitPoint,Point);
+		}
+		}
+		catch (RuntimeException e) {
+		    e.printStackTrace();
+		    return false;
+		}
+		finally{
+		session.flush();
+	    session.close();
+		}
+		
+	}
+	public boolean updateKITPoint( KIT_Point kitPoint,KIT_Point DatabasePoint)
+	{
+		Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Timestamp updated_at= new Timestamp(System.currentTimeMillis());
+        int kit=kitPoint.getValue();
+        DatabasePoint.setValue(kit);
+        DatabasePoint.setUpdated_at(updated_at);
+        try {
+            trns = session.beginTransaction();
+           
+            session.update(DatabasePoint);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if (trns != null) {
+                trns.rollback();
+                return false;
+            }
+            e.printStackTrace();
+        } 
+		return true ;
+	}
 	public KIT_Point addPointValue1(KIT_Point model1) {
         Transaction trns = null;
 	    int kit_point_value=model1.getValue();

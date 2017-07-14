@@ -31,7 +31,7 @@
 				for(i=0; i<project.length; i++)					
 					$("#project").append("<option value="+project[i].id+">"+project[i].project_name+" </option>");
 				for(i=0; i<user.length; i++){
-					if(user[i].user_type=="t")
+					if(user[i].user_type=="Super Admin")
 					$("#user").append("<option value="+user[i].id+">"+user[i].name+" </option>");
 				}
 			},

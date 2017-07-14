@@ -3,9 +3,12 @@ package com.EntityClasses;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Task_Master {
 		private int id;
-		private int project_id;
+		//private int project_id;
 		private String name;
 		private int assigned_to;
 		private String description;
@@ -16,18 +19,27 @@ public class Task_Master {
 		private Date end_date;
 		private Timestamp created_at;
 		private Timestamp updated_at;
+		private Project_Master project_id;
+		
+		
+		public Project_Master getProject_id() {
+			return project_id;
+		}
+		public void setProject_id(Project_Master project_id) {
+			this.project_id = project_id;
+		}
 		public int getId() {
 			return id;
 		}
 		public void setId(int id) {
 			this.id = id;
 		}
-		public int getProject_id() {
+		/*public int getProject_id() {
 			return project_id;
 		}
 		public void setProject_id(int project_id) {
 			this.project_id = project_id;
-		}
+		}*/
 		public String getName() {
 			return name;
 		}

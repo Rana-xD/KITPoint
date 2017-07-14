@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 //import org.springframework.stereotype.Service;
 
+
 import com.EntityClasses.Batch_Master;
 import com.EntityClasses.Project_Category_Master;
 import com.EntityClasses.Project_Master;
@@ -22,6 +23,7 @@ import com.EntityClasses.Semester_Master;
 import com.EntityClasses.Task_Master;
 import com.EntityClasses.User_Info;
 import com.HibernateUtil.HibernateUtil;
+import com.ModelClasses.ProjectForViewModel;
 import com.ModelClasses.Project_Model;
 import com.ModelClasses.Task_Model;
 import com.ModelClasses.retrieve;
@@ -121,13 +123,15 @@ public class userDaoImpl implements usersDao{
         }
         return users;
     }
-    public static List<Project_Master> getAllProject() {
-        List<Project_Master> projects= new ArrayList<Project_Master>();
+    public static List<ProjectForViewModel> getAllProject() {
+        //List<Project_Model> projects= new ArrayList<Project_Model>();
         Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
+        List<ProjectForViewModel> projects = null;
+		try {
             trns = session.beginTransaction();
-            projects = session.createQuery("from Project_Master").list();
+           projects = session.createQuery("from Project_Master").list();
+            System.out.print(projects);
         } catch (RuntimeException e) {
             e.printStackTrace();
             return projects;
@@ -375,7 +379,7 @@ public class userDaoImpl implements usersDao{
     		Date end_date = new SimpleDateFormat("MM/dd/yyyy").parse(t.getEnd_date());
     		Date deadline = new SimpleDateFormat("MM/dd/yyyy").parse(t.getDeadline());
     		Task_Master tm = new Task_Master();
-    		tm.setProject_id(t.getProject_id());
+    		//tm.setProject_id(t.getProject_id());
     		tm.setName(t.getName());
     		tm.setAssigned_to(t.getAssigned_to());
     		tm.setDescription(t.getDescription());

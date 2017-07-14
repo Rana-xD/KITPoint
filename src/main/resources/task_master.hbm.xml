@@ -5,10 +5,12 @@
  	<class name="com.EntityClasses.Task_Master" table="task_master">
  	 	
  	 <id name="id" column="id" >    
- 	    <generator class="assigned"/>    
+ 	    <generator class="identity"/>    
  	 </id>
  	 	
-    <property name="project_id"  column="project_id"  />
+    <many-to-one name="project_id" class="com.EntityClasses.Project_Master" fetch="select">
+                <column name="project_id" not-null="true" />
+        </many-to-one>
     <property name="name" column="name"/>
     <property name="assigned_to" column="assigned_to"/>
     <property name="description" column="description"/>

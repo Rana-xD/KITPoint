@@ -31,18 +31,18 @@
 						  </div>
 						   <div class="form-group">
 						     <label class="col-sm-2 control-label">User Type</label>
-						   <div class="col-sm-10">
-                              
-                                <label class="radio-inline">
-                                    <input type="radio" id="user_type" value="Super Admin" checked>Super admin
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" id="user_type"  value="Admin">Admin
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" id="user_type"  value="User">User
-                                </label>
-                            </div>
+								  <div class="col-sm-10">
+		                                <label class="radio-inline">
+		                                    <input type="radio" id="user_type" name="optionsRadiosInline" value="Super Admin" checked>Super admin
+		                                </label>
+		                                <label class="radio-inline">
+		                                    <input type="radio" id="user_type"  name="optionsRadiosInline" value="Admin">Admin
+		                                </label>
+		                                <label class="radio-inline">
+		                                    <input type="radio" id="user_type" name="optionsRadiosInline"  value="User">User
+		                                </label>
+		                           </div>
+		                            
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Batch</label>

@@ -3,6 +3,10 @@ package com.EntityClasses;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.OneToMany;
+
+import org.hibernate.mapping.Set;
+
 public class Project_Master {
 		private int id;
 		private String project_name;
@@ -14,6 +18,15 @@ public class Project_Master {
 		private String project_member;
 		private String description;
 		private String status;
+		
+		private Set tasks;
+		
+		public Set getTasks() {
+			return tasks;
+		}
+		public void setTasks(Set tasks) {
+			this.tasks = tasks;
+		}
 		public String getStatus() {
 			return status;
 		}
