@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: limkimchheng
+Build-Jdk: 1.8.0_131
+=======
+Built-By: rana
+Build-Jdk: 1.8.0_60
+>>>>>>> 8ed0899a015039a4e9da54ed60b4fd2d70b12c6e
+Created-By: Maven Integration for Eclipse
+
