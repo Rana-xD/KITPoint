@@ -11,6 +11,10 @@
   <spring:url value="/resources/Bootstrap/css/bootstrap.min.css" var="bootatrapCore"/>
   <spring:url value="/resources/Bootstrap/css/sb-admin.css" var="CustomCSS"/>
 <spring:url value="/resources/Bootstrap/font-awesome/css/font-awesome.min.css" var="customfontCSS"/>
+ <spring:url value="/resources/Bootstrap/css/sweetalert.css" var="alertStyle"/>
+      <link rel="stylesheet" href="${alertStyle}">
+<spring:url value="/resources/Bootstrap/js/sweetalert.min.js" var="alertJS"/>
+      <script src="${alertJS}"></script>
     <link href="${bootatrapCore}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="${CustomCSS}" rel="stylesheet">
@@ -20,13 +24,14 @@
     <link href="${customfontCSS }" rel="stylesheet" type="text/css">
 
 	<!--  jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	
 	<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
 	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    
 <!--  jQuery Validation -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script> 
+
 <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 

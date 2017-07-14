@@ -33,14 +33,14 @@ load = function(){
 					
 				}
 				$("#batch").change(function(){
-					var x = document.getElementById("batch").value;
+					var batchValue = document.getElementById("batch").value;
 					for(i=0; i<response.batch.length; i++){
-						  if(response.batch[i].id==x)
+						  if(response.batch[i].id==batchValue)
 							  {
-							  x = response.batch[i].semester_id;
+							  batchValue = response.batch[i].semester_id;
 							  }
 					  }
-					$("#semester").val(x);
+					$("#semester").val(batchValue);
 					
 				
 					
@@ -53,9 +53,9 @@ load = function(){
 $(document).ready(function(){
 	$("#btnSubmit").click(function(){		 
 	$.ajax({
-		url:'batchUpdate',
+		url:'updateBatch',
 		type:'POST',
-		data:{name:$("#batch").val(),semester_id:$("#semester").val()},
+		data:{id:$("#batch").val(),semester_id:$("#semester").val()},
 		success: function(response){
 				if(response.status=="200")
 					{
@@ -101,7 +101,7 @@ $(document).ready(function(){
                             </div>
 						  <div class="form-group">
 						    <div class="col-sm-offset-2 col-sm-10">
-						      <button type="submit" id="btnSubmit" class="btn btn-default">Update</button>
+						      <button id="btnSubmit" class="btn btn-default">Update</button>
 						      <button type="reset" class="btn btn-default">Cancel</button>
 						  
 						    </div>
